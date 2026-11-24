@@ -2,104 +2,297 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Guía entrevista Romaria</title>
+<meta name="description" content="Guía de estudio para la entrevista de Capitán de Servicio en Romaria: carta, barra, preguntas y práctica.">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#c63a24">
+<meta name="theme-color" content="#3c4a2c">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Romaria">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* VOICE: directo, de cancha, como un briefing de capitán antes del servicio
-   IDEA: la libreta de comandas / el briefing pegado en la cocina
-   PICTURE: la tarjeta de la entrevista + el reproductor para escuchar
-   COLOUR and TYPE: rojo pomodoro dominante, verde albahaca de apoyo, tinta oscura; Archivo + Inter
-   LAYOUT: banda roja con la cita, índice, secciones en una columna, reproductor fijo abajo */
+/* Diseño inspirado en la identidad de Romaria: verde oliva, blanco, serifa clásica y dibujos de línea fina.
+   Tres vistas: Estudiar (capítulos), Practicar (tarjetas, quiz, simulador) y Hoy (la cita y el checklist). */
 :root{color-scheme:light dark;
---bg:light-dark(#ffffff,#141414);--ink:light-dark(#1b1b1b,#f1efe9);--soft:light-dark(#5b5b5b,#b9b5ac);
---red:#c63a24;--redInk:#ffffff;--basil:light-dark(#2f6b3a,#7cc48a);--card:light-dark(#f6f4f1,#1f1f1f);--line:light-dark(#e3dfd8,#2d2d2d)}
+--bg:light-dark(#f4f0e5,#13170e);
+--paper:light-dark(#fffdf7,#1c2116);
+--ink:light-dark(#222a1a,#eeeadb);
+--soft:light-dark(#62685a,#a9ab9a);
+--line:light-dark(#e2dccb,#2e3625);
+--olive:light-dark(#5f7046,#a8b98a);
+--olive-d:light-dark(#4b5837,#c7d4ab);
+--on-olive:light-dark(#ffffff,#13170e);
+--terra:light-dark(#a9532f,#e39470);
+--serif:'Playfair Display',Georgia,'Times New Roman',serif;
+--sans:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;
+--shadow:0 18px 40px -22px rgba(35,44,24,.45)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
-html{scroll-padding-top:72px}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip;padding-bottom:120px}
-h1,h2,h3{font-family:Archivo,Inter,sans-serif;line-height:1.1;text-wrap:balance;margin:0}
-h1{font-size:clamp(32px,7vw,48px);font-weight:800}
-h2{font-size:clamp(24px,5vw,32px);font-weight:800;margin-bottom:12px}
-h3{font-size:18px;font-weight:700;margin:18px 0 6px}
-.band{padding:clamp(24px,4vw,56px) max(5vw,16px)}
-.wrap{max-width:760px;margin:0 auto}
-.hero{background:var(--red);color:var(--redInk)}
-.hero p{margin:10px 0 0;font-size:17px;opacity:.95}
-.ticket{margin-top:20px;background:#fff;color:#1b1b1b;border-radius:14px;padding:18px 18px 14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-.ticket .t{font-family:Archivo;font-size:clamp(30px,8vw,44px);font-weight:800;color:var(--red);white-space:nowrap}
-.ticket dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0 0}
-.ticket dt{color:#666;font-size:14px}.ticket dd{margin:0;font-weight:600}
-.btn{appearance:none;border:0;border-radius:999px;min-height:44px;padding:0 18px;font:600 15px Inter,sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-.btn svg{width:16px;height:16px;fill:currentColor}
-.btn:focus-visible{outline:3px solid var(--basil);outline-offset:2px}
-.primary{background:#1b1b1b;color:#fff}
-.hero .primary{background:#fff;color:var(--red);margin-top:18px}
-.listen{background:var(--card);color:var(--ink);border:1px solid var(--line);margin:4px 0 10px}
-.nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding:8px max(5vw,16px)}
-.nav a{flex:none;color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;padding:8px 12px;border-radius:999px;background:var(--card)}
-section{border-bottom:1px solid var(--line)}
-ul{padding-left:20px;margin:6px 0}li{margin:4px 0}
+html{scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);overflow-x:clip;padding-bottom:calc(92px + env(safe-area-inset-bottom));-webkit-tap-highlight-color:transparent}
+body.playing{padding-bottom:calc(168px + env(safe-area-inset-bottom))}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+a{color:var(--olive-d)}
+button{font-family:inherit}
+svg{flex:none}
+.wrap{max-width:720px;margin:0 auto}
+.eyebrow{font:600 11px/1.2 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--olive);margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* Barra superior */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top));background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;flex:1;text-decoration:none;color:var(--ink)}
+.brand .seal{width:36px;height:36px;color:var(--olive)}
+.brand b{display:block;font:600 18px/1 var(--serif);letter-spacing:.14em}
+.brand small{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);margin-top:3px}
+.ring{position:relative;width:40px;height:40px}
+.ring svg{width:40px;height:40px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:3}
+.ring .bgc{stroke:var(--line)}.ring .fg{stroke:var(--olive);stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font:600 11px var(--sans);color:var(--olive-d)}
+.icon-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.icon-btn svg{width:20px;height:20px}
+
+/* Botones */
+.btn{appearance:none;border:0;border-radius:999px;min-height:46px;padding:0 20px;font:600 15px var(--sans);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;transition:transform .15s ease,background .2s ease}
+.btn:active{transform:scale(.97)}
+.btn svg{width:18px;height:18px}
+.btn:focus-visible,.icon-btn:focus-visible,.tabs button:focus-visible,.opt:focus-visible,.flash:focus-visible{outline:3px solid var(--olive);outline-offset:3px}
+.btn-cream{background:#f6f2e6;color:#2d3422}
+.btn-ghost{background:transparent;color:#f6f2e6;border:1px solid rgba(246,242,230,.45)}
+.btn-olive{background:var(--olive);color:var(--on-olive)}
+.btn-line{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px}
+
+/* Portada */
+.hero{position:relative;overflow:hidden;color:#f6f2e6;padding:34px 20px 40px;background:radial-gradient(120% 90% at 85% 0%,#73855a 0%,#4b5837 48%,#283019 100%)}
+.hero .wrap{position:relative;z-index:1}
+.deco{position:absolute;color:#f6f2e6;opacity:.11;pointer-events:none}
+.emblem{width:112px;height:112px;color:#f6f2e6;display:block;margin-bottom:18px}
+.hero .eyebrow{color:#d9e2c3}
+.hero h1{font-size:clamp(36px,10vw,58px);line-height:1.02;margin:10px 0 0}
+.hero h1 em{display:block;font-style:italic;font-weight:400;color:#dde6c8;font-size:.62em;margin-top:6px}
+.hero .lead{margin:14px 0 0;max-width:36ch;font-size:16px;opacity:.92}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(246,242,230,.35);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:500}
+.chip svg{width:15px;height:15px}
+.chip.live{background:rgba(246,242,230,.14)}
+.meter{margin-top:26px}
+.meter .lbl{display:flex;justify-content:space-between;font-size:13px;opacity:.9;margin-bottom:8px}
+.meter .bar{height:6px;border-radius:9px;background:rgba(246,242,230,.18);overflow:hidden}
+.meter .bar i{display:block;height:100%;width:0;background:#e3ebcc;border-radius:9px;transition:width .6s ease}
+
+/* Índice de capítulos */
+.index{padding:34px 20px 8px}
+.index h2{font-size:26px;margin:6px 0 16px}
+.chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.chapters a{position:relative;display:flex;flex-direction:column;gap:4px;padding:14px 14px 12px;border:1px solid var(--line);background:var(--paper);border-radius:18px;text-decoration:none;color:var(--ink);min-height:104px;transition:border-color .2s}
+.chapters a:hover{border-color:var(--olive)}
+.chapters .n{font:italic 400 24px/1 var(--serif);color:var(--olive)}
+.chapters .t{font-weight:600;font-size:14px;line-height:1.3;padding-right:20px}
+.chapters .m{font-size:12px;color:var(--soft);margin-top:auto}
+.chapters .ok{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:var(--olive);color:var(--on-olive);display:none;place-items:center}
+.chapters .ok svg{width:13px;height:13px}
+.chapters a.is-done .ok{display:grid}
+
+/* Capítulos */
+.chap{padding:46px 20px 40px;border-top:1px solid var(--line);transition:background .4s}
+.chap.speaking{background:color-mix(in srgb,var(--olive) 8%,transparent)}
+.chap h2{font-size:clamp(30px,7.6vw,40px);line-height:1.08;margin:8px 0 14px}
+.chap h3{font:600 12px/1.3 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--olive);margin:30px 0 6px;display:flex;align-items:center;gap:12px}
+.chap h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.chap ul{list-style:none;padding:0;margin:6px 0}
+.chap ul:not(.gl) li{position:relative;padding:10px 0 10px 22px;border-bottom:1px dashed var(--line)}
+.chap ul:not(.gl) li::before{content:"";position:absolute;left:4px;top:20px;width:6px;height:6px;border-radius:50%;background:var(--olive)}
 .k{font-weight:600}
-.price{white-space:nowrap;color:var(--basil);font-weight:600}
-.tip{background:var(--card);border-left:4px solid var(--basil);border-radius:8px;padding:12px 14px;margin:12px 0}
-.say{background:var(--card);border-radius:10px;padding:12px 14px;margin:8px 0;font-style:italic}
-details{background:var(--card);border-radius:12px;margin:10px 0;padding:0 14px}
-summary{cursor:pointer;font-weight:600;padding:14px 0;min-height:44px}
+.price{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--terra);white-space:nowrap}
+.listen{background:transparent;border:1px solid var(--line);color:var(--olive-d);min-height:42px;padding:0 16px;font-size:14px;margin:0 0 16px}
+.key{margin:0 0 18px;padding:16px 18px 18px;border-radius:18px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow)}
+.key p:not(.eyebrow){margin:6px 0 0;font:400 18px/1.5 var(--serif)}
+.tip{background:color-mix(in srgb,var(--olive) 11%,var(--paper));border-left:3px solid var(--olive);border-radius:4px 16px 16px 4px;padding:14px 16px;margin:18px 0}
+.say{position:relative;font:italic 400 19px/1.55 var(--serif);padding:22px 20px 18px 46px;border-radius:18px;background:var(--paper);border:1px solid var(--line);margin:16px 0}
+.say::before{content:"\201C";position:absolute;left:14px;top:2px;font:700 52px/1 var(--serif);color:var(--olive)}
+details{background:var(--paper);border:1px solid var(--line);border-radius:16px;margin:10px 0;padding:0 16px;transition:border-color .2s}
+details[open]{border-color:var(--olive)}
+summary{cursor:pointer;font-weight:600;padding:15px 28px 15px 0;min-height:48px;list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:4px;top:22px;width:9px;height:9px;border-right:2px solid var(--olive);border-bottom:2px solid var(--olive);transform:rotate(45deg);transition:transform .2s}
+details[open] summary::after{transform:rotate(-135deg);top:26px}
 details[open] summary{border-bottom:1px solid var(--line);margin-bottom:8px}
 details p{margin:8px 0 14px}
 .note{font-size:13px;color:var(--soft)}
-.gal{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 0 10px}
-.gal figure{flex:none;width:150px;margin:0;scroll-snap-align:start}
-.gal img{width:150px;height:110px;object-fit:cover;border-radius:10px;display:block;background:var(--card)}
-.gal figcaption{font-size:13px;margin-top:4px;color:var(--soft)}
-.gl li{display:flow-root}.gl img.ph{float:left;width:64px;height:64px;object-fit:cover;border-radius:8px;margin:2px 12px 4px 0;background:var(--card)}
-.credit{font-size:12px;color:var(--soft)}
-.gl li{padding:6px 0;border-bottom:1px solid var(--line);list-style:none}.gl{padding-left:0}
-.foto{display:inline-flex;align-items:center;min-height:36px;margin-left:8px;padding:0 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--basil);font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap}
-.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
-.check input{width:22px;height:22px;flex:none;accent-color:var(--red);margin-top:2px}
-.player{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#1b1b1b;color:#fff;padding:10px max(4vw,12px) calc(10px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.player .now{flex:1 1 160px;font-size:14px;opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.player .btn{background:#2c2c2c;color:#fff;padding:0 14px}
-.player .btn.on{background:var(--red)}
-.player select{min-height:44px;border-radius:999px;background:#2c2c2c;color:#fff;border:0;padding:0 12px;font:16px Inter}
-.speaking{outline:3px solid var(--red);outline-offset:6px;border-radius:6px}
-@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+.gal{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;margin:0 -2px}
+.gal figure{flex:none;width:160px;margin:0;scroll-snap-align:start}
+.gal img{width:160px;height:118px;object-fit:cover;border-radius:14px;display:block;background:var(--line)}
+.gal figcaption{font:italic 14px var(--serif);margin-top:6px;color:var(--soft)}
+.gl li{display:flow-root;padding:10px 0;border-bottom:1px dashed var(--line)}
+.gl img.ph{float:left;width:64px;height:64px;object-fit:cover;border-radius:12px;margin:2px 12px 4px 0;background:var(--line)}
+.foto{display:inline-flex;align-items:center;min-height:34px;margin-left:6px;padding:0 12px;border-radius:999px;background:transparent;border:1px solid var(--line);color:var(--olive-d);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap}
+.done-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.done{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.done[aria-pressed=true]{background:var(--olive);color:var(--on-olive);border-color:var(--olive)}
+.next{margin-left:auto;font:italic 500 16px var(--serif);text-decoration:none;color:var(--olive-d);display:inline-flex;align-items:center;min-height:44px}
+
+/* Practicar */
+.pv{padding:30px 20px 20px}
+.pv h2{font-size:clamp(32px,8vw,42px);margin:6px 0 6px}
+.pv .sub{color:var(--soft);margin:0 0 20px}
+.seg{display:flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:22px}
+.seg button{flex:1;min-height:42px;border-radius:999px;border:0;background:transparent;font:600 14px var(--sans);color:var(--soft);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--olive);color:var(--on-olive)}
+.decks{display:flex;gap:8px;overflow-x:auto;padding:2px 0 14px;scrollbar-width:none}
+.decks::-webkit-scrollbar,.gal::-webkit-scrollbar{display:none}
+.gal{scrollbar-width:none}
+.decks button{flex:none;min-height:38px;padding:0 15px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);font:500 14px var(--sans);cursor:pointer}
+.decks button[aria-pressed=true]{border-color:var(--olive);background:color-mix(in srgb,var(--olive) 14%,var(--paper));color:var(--olive-d);font-weight:600}
+.flash{perspective:1400px;height:300px;cursor:pointer;margin:4px 0 16px;border-radius:24px}
+.flash-in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.75,.2,1);transform-style:preserve-3d}
+.flash.flipped .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:24px;padding:28px 26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:10px;box-shadow:var(--shadow)}
+.face.front{background:var(--paper);border:1px solid var(--line)}
+.face.front::before{content:"";position:absolute;inset:10px;border:1px solid var(--line);border-radius:17px;pointer-events:none}
+.face.back{transform:rotateY(180deg);background:linear-gradient(160deg,#5c6d43,#2b331d);color:#f6f2e6}
+.face .fname{font:600 clamp(26px,7vw,34px)/1.15 var(--serif)}
+.face .hint{font-size:13px;color:var(--soft)}
+.face .fback{font:400 19px/1.45 var(--serif);max-width:30ch}
+.face .fextra{font:italic 600 22px var(--serif);color:#e8d6a8}
+.face .wheat{width:22px;height:44px;color:var(--olive);opacity:.8}
+.face.back .eyebrow{color:#d3ddb9}
+.fcount{display:flex;justify-content:space-between;font-size:13px;color:var(--soft);margin-bottom:10px}
+.pbar{height:4px;border-radius:9px;background:var(--line);overflow:hidden;margin-bottom:16px}
+.pbar i{display:block;height:100%;width:0;background:var(--olive);transition:width .4s}
+.fact{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fact .btn{width:100%}
+.again{background:var(--paper);color:var(--terra);border:1px solid color-mix(in srgb,var(--terra) 45%,var(--line))}
+.endcard{text-align:center;padding:34px 20px;border:1px solid var(--line);border-radius:24px;background:var(--paper)}
+.endcard .big{font:600 56px/1 var(--serif);color:var(--olive)}
+.endcard p{margin:10px 0 18px}
+.qhead{display:flex;gap:5px;margin-bottom:18px}
+.qhead i{flex:1;height:4px;border-radius:9px;background:var(--line)}
+.qhead i.ok{background:var(--olive)}.qhead i.bad{background:var(--terra)}.qhead i.cur{background:var(--ink)}
+.qtext{font:600 clamp(22px,6vw,28px)/1.25 var(--serif);margin:6px 0 14px}
+.opt{display:block;width:100%;text-align:left;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:var(--paper);font:500 15px/1.4 var(--sans);color:var(--ink);margin:9px 0;min-height:54px;cursor:pointer;transition:border-color .2s,background .2s}
+.opt:hover:not(:disabled){border-color:var(--olive)}
+.opt:disabled{cursor:default}
+.opt.ok{border-color:var(--olive);background:color-mix(in srgb,var(--olive) 16%,var(--paper))}
+.opt.bad{border-color:var(--terra);background:color-mix(in srgb,var(--terra) 12%,var(--paper))}
+.expl{margin:14px 0;padding:14px 16px;border-radius:14px;background:color-mix(in srgb,var(--olive) 10%,var(--paper));font-size:15px}
+.expl b{font-family:var(--serif);font-size:17px}
+.simq{font:600 clamp(24px,6.5vw,30px)/1.25 var(--serif);margin:8px 0 18px}
+.timer{display:flex;align-items:center;gap:16px;margin:8px 0 18px}
+.timer svg{width:76px;height:76px;transform:rotate(-90deg)}
+.timer circle{fill:none;stroke-width:5}
+.timer .bgc{stroke:var(--line)}.timer .fg{stroke:var(--olive);stroke-linecap:round}
+.timer .tt{font:600 30px var(--serif);min-width:3ch}
+.answer{border-left:3px solid var(--olive);padding:4px 0 4px 16px;margin:14px 0}
+.answer p{margin:6px 0}
+
+/* Hoy */
+.hoy-top{padding:30px 20px 4px}
+.hoy-top h2{font-size:clamp(32px,8vw,42px);margin:6px 0 16px}
+.ticket{position:relative;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:22px;padding:22px 22px 18px;box-shadow:var(--shadow)}
+.ticket::before,.ticket::after{content:"";position:absolute;top:96px;width:22px;height:22px;border-radius:50%;background:var(--bg);border:1px solid var(--line)}
+.ticket::before{left:-12px}.ticket::after{right:-12px}
+.ticket .t{font:600 clamp(32px,9vw,44px)/1.05 var(--serif);color:var(--olive-d)}
+.ticket .cd{font:italic 500 17px var(--serif);color:var(--terra);margin:8px 0 0;min-height:1.5em}
+.ticket dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:24px 0 0;padding-top:18px;border-top:1px dashed var(--line)}
+.ticket dt{color:var(--soft);font-size:14px}.ticket dd{margin:0;font-weight:600}
+.ticket .btn-row{margin-top:18px}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.check input{width:24px;height:24px;flex:none;accent-color:var(--olive);margin-top:1px}
+.check input:checked+span{color:var(--soft);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--olive) 60%,transparent)}
+
+/* Reproductor y pestañas */
+.player{position:fixed;left:10px;right:10px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:29;background:#283019;color:#f6f2e6;border-radius:20px;padding:10px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;box-shadow:0 18px 40px -12px rgba(0,0,0,.5);max-width:720px;margin:0 auto}
+.player[hidden]{display:none}
+.player .now{flex:1 1 160px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:4px}
+.player .now b{font-family:var(--serif);font-style:italic;font-weight:500}
+.player .btn{background:rgba(246,242,230,.12);color:#f6f2e6;min-height:42px;padding:0 14px}
+.player .btn.on{background:#6c7d51}
+.player select{min-height:42px;border-radius:999px;background:rgba(246,242,230,.12);color:#f6f2e6;border:0;padding:0 12px;font:16px var(--sans)}
+.player select option{color:#222}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;gap:4px;background:color-mix(in srgb,var(--paper) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom))}
+.tabs button{flex:1;max-width:180px;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:58px;border:0;background:none;color:var(--soft);font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;border-radius:16px;cursor:pointer}
+.tabs button span.ic{display:grid;place-items:center;width:56px;height:30px;border-radius:999px;transition:background .25s}
+.tabs button svg{width:22px;height:22px}
+.tabs button[aria-current=page]{color:var(--olive-d)}
+.tabs button[aria-current=page] span.ic{background:color-mix(in srgb,var(--olive) 18%,transparent)}
+.view[hidden]{display:none}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}.view{animation:rise .45s cubic-bezier(.2,.7,.2,1)}@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}}
+@media(prefers-reduced-motion:reduce){.flash-in{transition:none}}
 </style>
 </head>
 <body>
 
-<header class="band hero" id="inicio">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wheat" viewBox="0 0 40 80"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M20 79V20"/><path d="M20 20C15 15 15 8 20 2C25 8 25 15 20 20Z"/><path d="M20 30C12 29 9 22 10 16C16 18 20 23 20 30Z"/><path d="M20 30C28 29 31 22 30 16C24 18 20 23 20 30Z"/><path d="M20 40C12 39 9 32 10 26C16 28 20 33 20 40Z"/><path d="M20 40C28 39 31 32 30 26C24 28 20 33 20 40Z"/><path d="M20 50C12 49 9 42 10 36C16 38 20 43 20 50Z"/><path d="M20 50C28 49 31 42 30 36C24 38 20 43 20 50Z"/><path d="M20 60C12 59 9 52 10 46C16 48 20 53 20 60Z"/><path d="M20 60C28 59 31 52 30 46C24 48 20 53 20 60Z"/></g></symbol>
+  <symbol id="lemon" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="50" cy="50" r="46"/><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="4"/><path d="M50 50L88 50M50 50L76.9 76.9M50 50L50 88M50 50L23.1 76.9M50 50L12 50M50 50L23.1 23.1M50 50L50 12M50 50L76.9 23.1"/></g></symbol>
+  <symbol id="leaf" viewBox="0 0 60 100"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M30 6C52 24 56 58 30 92C4 58 8 24 30 6Z"/><path d="M30 98V6M30 30L42 22M30 46L46 36M30 62L44 54M30 30L18 22M30 46L14 36M30 62L16 54"/></g></symbol>
+  <symbol id="seal" viewBox="0 0 200 200"><g fill="none" stroke="currentColor"><circle cx="100" cy="100" r="96" stroke-width="2.4"/><circle cx="100" cy="100" r="89" stroke-width="1"/></g><use href="#wheat" x="72" y="44" width="56" height="112"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 4.5v14c3.5 0 6.5.5 8.5 2 2-1.5 5-2 8.5-2v-14c-3.5 0-6.5.5-8.5 2zM12 6.5v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cards" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="7" width="12.5" height="14" rx="2"/><path d="M8 3.5h10.5a2 2 0 0 1 2 2V17"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.3a10 10 0 0 0 6.2 6.2l1.3-2 4 1.5v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 4.5 5.5a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3.5" y="14" width="4" height="6.5" rx="1.5"/><rect x="16.5" y="14" width="4" height="6.5" rx="1.5"/></g></symbol>
+</svg>
+
+<header class="top">
+  <a class="brand" href="#inicio" data-go-view="estudiar">
+    <svg class="seal"><use href="#seal"/></svg>
+    <span><b>ROMARIA</b><small>Guía de entrevista</small></span>
+  </a>
+  <div class="ring" title="Capítulos estudiados"><svg viewBox="0 0 40 40"><circle class="bgc" cx="20" cy="20" r="17"/><circle class="fg" id="ringfg" cx="20" cy="20" r="17" stroke-dasharray="106.8" stroke-dashoffset="106.8"/></svg><span id="ringtx">0/10</span></div>
+  <button class="icon-btn" id="theme" aria-label="Cambiar tema claro u oscuro"><svg><use href="#i-moon"/></svg></button>
+</header>
+
+<main>
+<!-- ============ ESTUDIAR ============ -->
+<div class="view" data-view="estudiar">
+<header class="hero" id="inicio">
+  <svg class="deco" style="width:220px;height:220px;right:-60px;top:-40px"><use href="#lemon"/></svg>
+  <svg class="deco" style="width:90px;height:150px;right:30px;bottom:-30px;transform:rotate(18deg)"><use href="#leaf"/></svg>
+  <svg class="deco" style="width:60px;height:120px;left:-14px;bottom:30px;transform:rotate(-14deg)"><use href="#wheat"/></svg>
   <div class="wrap">
-    <h1>Entrevista en Romaria: guía de estudio</h1>
-    <p>Capitán de Servicio (o Garzón Senior). Léela o escúchala con los botones; el reproductor queda abajo.</p>
-    <div class="ticket" data-read>
-      <div class="t">Martes 24 · 18:00</div>
-      <dl>
-        <dt>Dónde</dt><dd>Av. Vitacura 3396, Casa 9, Vitacura</dd>
-        <dt>Preguntar por</dt><dd>Felipe Jiménez</dd>
-        <dt>Te citó</dt><dd>Isidora Carvallo</dd>
-        <dt>Teléfono</dt><dd>+56 9 5779 9515</dd>
-      </dl>
+    <svg class="emblem" viewBox="0 0 200 200" aria-hidden="true">
+      <defs><path id="arc" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0"/></defs>
+      <g fill="none" stroke="currentColor"><circle cx="100" cy="100" r="97" stroke-width="2"/><circle cx="100" cy="100" r="91" stroke-width=".8"/><circle cx="100" cy="100" r="62" stroke-width=".8"/></g>
+      <text fill="currentColor" style="font:600 12.5px Inter,sans-serif;letter-spacing:3px"><textPath href="#arc" textLength="470" lengthAdjust="spacing">CAPITÁN DE SERVICIO · GUÍA DE ESTUDIO ·</textPath></text>
+      <use href="#wheat" x="80" y="58" width="40" height="80"/>
+    </svg>
+    <p class="eyebrow">Pizza &amp; Bar · Vitacura</p>
+    <h1>Entrevista en Romaria<em>guía de estudio</em></h1>
+    <p class="lead">Capitán de Servicio (o Garzón Senior). Lee un capítulo, márcalo como estudiado y después ponte a prueba en Practicar. Todo se puede escuchar.</p>
+    <div class="chips">
+      <span class="chip live"><svg><use href="#i-clock"/></svg><span class="cdtext">Martes 24 · 18:00</span></span>
+      <span class="chip">Preguntar por Felipe Jiménez</span>
     </div>
-    <p style="margin:14px 0 0"><a href="https://www.instagram.com/romariapizzeria/" target="_blank" rel="noopener" style="color:#fff;font-weight:600">Ver fotos reales de sus platos en Instagram</a> · <a href="https://gour.media/romaria/menu/" target="_blank" rel="noopener" style="color:#fff;font-weight:600">Carta oficial</a></p>
-    <button class="btn primary" id="all"><svg viewBox="0 0 16 16"><path d="M4 2v12l10-6z"/></svg>Escuchar toda la guía</button>
+    <div class="btn-row">
+      <button class="btn btn-cream" id="all"><svg><use href="#i-play"/></svg>Escuchar toda la guía</button>
+      <button class="btn btn-ghost" data-go-view="practicar"><svg><use href="#i-cards"/></svg>Practicar</button>
+    </div>
+    <div class="meter"><div class="lbl"><span>Tu avance</span><span id="metertx">0 de 10 capítulos</span></div><div class="bar"><i id="meterbar"></i></div></div>
   </div>
 </header>
 
-<nav class="nav" aria-label="Secciones">
-  <a href="#romaria">El local</a><a href="#carta">Carta</a><a href="#barra">Barra y vinos</a><a href="#glosario">Ingredientes</a><a href="#venta">Venta sugestiva</a><a href="#capitan">El cargo</a><a href="#preguntas">Preguntas</a><a href="#casos">Casos</a><a href="#tuyas">Tus preguntas</a><a href="#dia">El día</a>
-</nav>
+<div class="index"><div class="wrap">
+  <p class="eyebrow">Índice</p>
+  <h2>Diez capítulos, en orden</h2>
+  <nav class="chapters" id="chapters" aria-label="Capítulos"></nav>
+</div></div>
 
-<main>
-<section class="band" id="romaria"><div class="wrap">
+<section class="chap" id="romaria" data-min="2"><div class="wrap">
+  <p class="eyebrow">Capítulo 01</p>
   <h2>Romaria en un minuto</h2>
+  <div class="key"><p class="eyebrow">En 10 segundos</p><p>Pizzería de masa delgada en Vitacura desde 2015. Se gasta entre 15 y 25 mil por persona. Los clientes alaban las pizzas y critican la atención irregular: ahí entra un buen capitán.</p></div>
   <ul>
     <li>Pizzería italiana de <span class="k">masa delgada</span> en Vitacura desde <span class="k">2015</span>. En Instagram se llaman Romaría Pizza and Bar.</li>
     <li>Se definen como pizzas y pastas artesanales, con recetas auténticas y altos estándares de servicio.</li>
@@ -112,8 +305,10 @@ details p{margin:8px 0 14px}
   <div class="tip">Frase para la entrevista: «Revisé su carta y su barra. Me gusta que tengan coctelería de autor y jarras para la terraza: eso da mucho juego para subir el ticket».</div>
 </div></section>
 
-<section class="band" id="carta"><div class="wrap">
+<section class="chap" id="carta" data-min="4"><div class="wrap">
+  <p class="eyebrow">Capítulo 02</p>
   <h2>La carta del salón</h2>
+  <div class="key"><p class="eyebrow">En 10 segundos</p><p>La Romaria, de la casa, cuesta 13.900. Margarita Romaria, Don Alfredo y Mechada, 16.900. Burrata y tabla de prosciutto, 17.900. La pasta estrella es la de ají amarillo, a 14.900.</p></div>
   <div class="gal"><figure data-w="Pizza_margarita" data-e="Pizza_Margherita"><figcaption>Pizza margarita</figcaption></figure><figure data-w="Burrata" data-e="Burrata"><figcaption>Burrata</figcaption></figure><figure data-w="Prosciutto" data-e="Prosciutto"><figcaption>Pizza con prosciutto y rúcula</figcaption></figure><figure data-w="Ñoquis" data-e="Gnocchi"><figcaption>Ñoquis</figcaption></figure><figure data-w="Tiramisú" data-e="Tiramisu"><figcaption>Tiramisú</figcaption></figure></div>
   <h3>Entradas</h3>
   <ul>
@@ -147,8 +342,10 @@ details p{margin:8px 0 14px}
   <p class="note">Carta revisada en gour.media/romaria el 24 de noviembre de 2026. Los precios pueden cambiar.</p>
 </div></section>
 
-<section class="band" id="barra"><div class="wrap">
+<section class="chap" id="barra" data-min="3"><div class="wrap">
+  <p class="eyebrow">Capítulo 03</p>
   <h2>Barra y vinos</h2>
+  <div class="key"><p class="eyebrow">En 10 segundos</p><p>Coctelería de autor: La Gringa, La Trampa, Sour Romaría e Il Capo. Jarras para la terraza. Pisco sour desde 4.300 y espumante por copa a 3.900.</p></div>
   <div class="gal"><figure data-w="Spritz" data-e="Spritz_(cocktail)"><figcaption>Aperol Spritz</figcaption></figure><figure data-w="Negroni" data-e="Negroni"><figcaption>Negroni</figcaption></figure><figure data-w="Pisco_sour" data-e="Pisco_sour"><figcaption>Pisco sour</figcaption></figure><figure data-w="Moscow_mule" data-e="Moscow_mule"><figcaption>Moscow mule</figcaption></figure><figure data-w="Sangría" data-e="Sangria"><figcaption>Sangría</figcaption></figure></div>
   <h3>Coctelería de la casa</h3>
   <ul>
@@ -177,8 +374,10 @@ details p{margin:8px 0 14px}
   </ul>
 </div></section>
 
-<section class="band" id="glosario"><div class="wrap">
+<section class="chap" id="glosario" data-min="6"><div class="wrap">
+  <p class="eyebrow">Capítulo 04</p>
   <h2>Ingredientes y términos</h2>
+  <div class="key"><p class="eyebrow">En 10 segundos</p><p>La bufala es más cremosa que la mozzarella. El prosciutto va después del horno. El pesto de Romaria lleva nuez. El ají amarillo se flambea con pisco.</p></div>
   <p class="note">Fotos de referencia desde Wikipedia (no son de Romaria). Toca «Ver fotos» para ver más en Google.</p>
   <h3>Quesos</h3>
   <ul class="gl">
@@ -281,8 +480,10 @@ details p{margin:8px 0 14px}
   </ul>
 </div></section>
 
-<section class="band" id="venta"><div class="wrap">
+<section class="chap" id="venta" data-min="2"><div class="wrap">
+  <p class="eyebrow">Capítulo 05</p>
   <h2>Venta sugestiva y maridajes</h2>
+  <div class="key"><p class="eyebrow">En 10 segundos</p><p>Primero, una entrada para compartir. Después, el vino que va con el plato. A los grupos, una jarra. Y para cerrar, postre y café.</p></div>
   <ul>
     <li><span class="k">Margarita Romaria o burrata</span>: Sauvignon Blanc Amaral de Leyda, o espumante por copa.</li>
     <li><span class="k">Don Alfredo o tabla de prosciutto</span>: Pinot Noir Casa Marín.</li>
@@ -291,12 +492,14 @@ details p{margin:8px 0 14px}
     <li><span class="k">Grupos en la terraza</span>: jarra de La Gringa o de Espojito para abrir la mesa.</li>
     <li><span class="k">Cierre</span>: tiramisú con espresso, o un limoncello o grappa de bajativo.</li>
   </ul>
-  <div class="say">«Para empezar, ¿les traigo una burrata al horno para compartir mientras eligen? Y con la Margarita Romaria les recomiendo el Sauvignon Blanc de Leyda; es fresco y le va perfecto a la bufala».</div>
+  <div class="say">Para empezar, ¿les traigo una burrata al horno para compartir mientras eligen? Y con la Margarita Romaria les recomiendo el Sauvignon Blanc de Leyda; es fresco y le va perfecto a la bufala.</div>
   <div class="tip">Idea clave para un capitán: subir el ticket con entradas para compartir, jarras y agregados del grupo D, sin que el cliente sienta que le están vendiendo. Y medirlo por garzón.</div>
 </div></section>
 
-<section class="band" id="capitan"><div class="wrap">
+<section class="chap" id="capitan" data-min="2"><div class="wrap">
+  <p class="eyebrow">Capítulo 06</p>
   <h2>Qué hace un capitán aquí</h2>
+  <div class="key"><p class="eyebrow">En 10 segundos</p><p>Antes del servicio prepara, en el peak lee la sala y al cierre deja todo listo. Corrige en privado y reconoce en público.</p></div>
   <ul>
     <li><span class="k">Antes del servicio</span>: revisar montaje, reservas y quiebres de stock; briefing de 5 minutos con sugerencias del día y rangos de mesas.</li>
     <li><span class="k">En el peak</span>: leer la sala, mover gente entre rangos, coordinar tiempos entre cocina, barra y terraza, y apagar incendios antes de que lleguen a la mesa.</li>
@@ -312,8 +515,10 @@ details p{margin:8px 0 14px}
   </ul>
 </div></section>
 
-<section class="band" id="preguntas"><div class="wrap">
+<section class="chap" id="preguntas" data-min="5"><div class="wrap">
+  <p class="eyebrow">Capítulo 07</p>
   <h2>Preguntas probables</h2>
+  <div class="key"><p class="eyebrow">En 10 segundos</p><p>Respuestas cortas, con un ejemplo real tuyo. Nunca hables mal de nadie. Ensáyalas en voz alta en el simulador de Practicar.</p></div>
   <p class="note">Toca cada pregunta para ver una respuesta modelo. Dila con tus palabras; no de memoria.</p>
   <details><summary>Cuéntame de ti.</summary><p>Llevo más de 20 años en sala. Partí de garzón en Santiago, en Puerto Varas llegué a jefe de sala y administrador, después estuve tres años en el Holiday Inn con estándar internacional, y este año lideré la revitalización de François en La Florida. Lo mío es la sala: el cliente, el equipo y el ritmo del servicio. Me gusta mucho un local como Romaria, con movimiento, terraza y buena barra.</p></details>
   <details><summary>¿Por qué quieres dejar tu trabajo actual?</summary><p>En François me tocó un proyecto de revitalización: carta, precios, estándares y equipo. Esa etapa ya la cumplí, y quiero volver a un salón de alto movimiento, con un equipo más grande y una barra fuerte, que es donde más aporto.</p><p class="note">No hables mal de nadie ni menciones contrato ni cotizaciones.</p></details>
@@ -328,8 +533,10 @@ details p{margin:8px 0 14px}
   <details><summary>¿Conoces Romaria?</summary><p>Sí, revisé la carta y la barra. Me llamó la atención la coctelería de autor como La Gringa y el Sour Romaría, las jarras para la terraza y pizzas como la Margarita Romaria con bufala o la Don Alfredo. Hay mucho espacio para venta sugestiva.</p></details>
 </div></section>
 
-<section class="band" id="casos"><div class="wrap">
+<section class="chap" id="casos" data-min="3"><div class="wrap">
+  <p class="eyebrow">Capítulo 08</p>
   <h2>Casos de servicio</h2>
+  <div class="key"><p class="eyebrow">En 10 segundos</p><p>Siempre en el mismo orden: disculpa, solución en el momento y, después, revisar en privado qué falló.</p></div>
   <details><summary>Una pizza llegó fría y el cliente reclama.</summary><p>Me disculpo, retiro la pizza y pido una nueva con prioridad a cocina. Mientras tanto le ofrezco algo para la espera. Después reviso si el problema fue el pase, el garzón o la cocina.</p></details>
   <details><summary>Terraza llena, faltan dos garzones, la cocina va atrasada.</summary><p>Reasigno rangos, me tomo mesas, aviso a los clientes del tiempo de espera antes de que pregunten, empujo bebidas y entradas rápidas para que la espera se sienta menos, y coordino con cocina el orden de salida.</p></details>
   <details><summary>Te piden un vino para la Don Alfredo.</summary><p>Le recomiendo el Pinot Noir Casa Marín: es liviano y va muy bien con el prosciutto y el grana. Si prefieren blanco, un Chardonnay de Leyda.</p></details>
@@ -337,8 +544,10 @@ details p{margin:8px 0 14px}
   <details><summary>Un cliente con alergia o vegano.</summary><p>Confirmo con cocina antes de prometer nada. La carta marca platos veganos y hay pizzas con opción vegana: Norma, Del Huerto, Piero y Funghi Tartufo.</p></details>
 </div></section>
 
-<section class="band" id="tuyas"><div class="wrap">
+<section class="chap" id="tuyas" data-min="1"><div class="wrap">
+  <p class="eyebrow">Capítulo 09</p>
   <h2>Preguntas para hacerles</h2>
+  <div class="key"><p class="eyebrow">En 10 segundos</p><p>Elige dos o tres: propinas, sueldo base, turnos y tamaño del equipo.</p></div>
   <ul>
     <li>¿Cómo funcionan las propinas: individual o en pozo? ¿Quiénes entran y cada cuánto se pagan?</li>
     <li>¿Cuál es el sueldo base, el tipo de contrato y el período de prueba?</li>
@@ -349,44 +558,196 @@ details p{margin:8px 0 14px}
     <li>¿Cómo es la capacitación de carta y barra al entrar?</li>
   </ul>
 </div></section>
+</div>
 
-<section class="band" id="dia"><div class="wrap">
-  <h2>El día de la entrevista</h2>
-  <div class="check">
-    <label><input type="checkbox">Contestar el correo a Isidora confirmando la entrevista.</label>
-    <label><input type="checkbox">CV impreso, la versión corregida con el correo nuevo.</label>
-    <label><input type="checkbox">Ropa: camisa lisa negra o blanca, pantalón oscuro, zapatos lustrados.</label>
-    <label><input type="checkbox">Teléfono con sonido y el filtro de spam apagado.</label>
-    <label><input type="checkbox">Salir a las 16:45 en auto sin TAG, o 16:30 en metro: Línea 5 hasta Baquedano, Línea 1 hasta Tobalaba, y micro por Avenida Vitacura.</label>
-    <label><input type="checkbox">Llegar a las 17:45 y preguntar por Felipe Jiménez.</label>
-    <label><input type="checkbox">Vuelta: la micro 405 corre las 24 horas por Avenida Vitacura y te deja en Pajaritos, en el paradero 10 o en Las Parcelas.</label>
-  </div>
-  <div class="tip">Al llegar, mira la sala con ojos de capitán: cuántas mesas, cómo está la terraza, cómo atienden. Te sirve para comentar algo concreto en la entrevista.</div>
-</div></section>
+<!-- ============ PRACTICAR ============ -->
+<div class="view" data-view="practicar" hidden>
+  <div class="pv"><div class="wrap">
+    <p class="eyebrow">Ponte a prueba</p>
+    <h2>Practicar</h2>
+    <p class="sub">Lo que se practica se recuerda. Tres formas de entrenar, todas con audio.</p>
+    <div class="seg" role="group" aria-label="Modo de práctica">
+      <button data-mode="tarjetas" aria-pressed="true">Tarjetas</button>
+      <button data-mode="quiz" aria-pressed="false">Quiz</button>
+      <button data-mode="sim" aria-pressed="false">Simulador</button>
+    </div>
+
+    <div class="mode" data-mode="tarjetas">
+      <div class="decks" role="group" aria-label="Mazo">
+        <button data-deck="carta" aria-pressed="true">La carta</button>
+        <button data-deck="barra" aria-pressed="false">Barra</button>
+        <button data-deck="ingredientes" aria-pressed="false">Ingredientes</button>
+        <button data-deck="maridajes" aria-pressed="false">Maridajes</button>
+      </div>
+      <div class="fcount"><span id="fleft"></span><span id="fknown"></span></div>
+      <div class="pbar"><i id="fbar"></i></div>
+      <div id="fstage"></div>
+    </div>
+
+    <div class="mode" data-mode="quiz" hidden><div id="qstage"></div></div>
+    <div class="mode" data-mode="sim" hidden><div id="sstage"></div></div>
+  </div></div>
+</div>
+
+<!-- ============ HOY ============ -->
+<div class="view" data-view="hoy" hidden>
+  <div class="hoy-top"><div class="wrap">
+    <p class="eyebrow">La cita</p>
+    <h2>El día de la entrevista</h2>
+    <div class="ticket" data-read>
+      <p class="eyebrow">Entrevista · Capitán de Servicio</p>
+      <div class="t">Martes 24 · 18:00</div>
+      <p class="cd" id="cd"></p>
+      <dl>
+        <dt>Dónde</dt><dd>Av. Vitacura 3396, Casa 9, Vitacura</dd>
+        <dt>Preguntar por</dt><dd>Felipe Jiménez</dd>
+        <dt>Te citó</dt><dd>Isidora Carvallo</dd>
+        <dt>Teléfono</dt><dd>+56 9 5779 9515</dd>
+      </dl>
+      <div class="btn-row">
+        <a class="btn btn-olive" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Vitacura%203396%2C%20Vitacura" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Cómo llegar</a>
+        <a class="btn btn-line" href="tel:+56957799515"><svg><use href="#i-phone"/></svg>Llamar</a>
+      </div>
+      <p class="note" style="margin:14px 0 0"><a href="https://www.instagram.com/romariapizzeria/" target="_blank" rel="noopener">Ver fotos reales de sus platos en Instagram</a> · <a href="https://gour.media/romaria/menu/" target="_blank" rel="noopener">Carta oficial</a></p>
+    </div>
+  </div></div>
+
+  <section class="chap" id="dia" data-min="1" style="border-top:0;padding-top:26px"><div class="wrap">
+    <p class="eyebrow">Capítulo 10</p>
+    <h2>Checklist del día</h2>
+    <div class="check">
+      <label><input type="checkbox"><span>Contestar el correo a Isidora confirmando la entrevista.</span></label>
+      <label><input type="checkbox"><span>CV impreso, la versión corregida con el correo nuevo.</span></label>
+      <label><input type="checkbox"><span>Ropa: camisa lisa negra o blanca, pantalón oscuro, zapatos lustrados.</span></label>
+      <label><input type="checkbox"><span>Teléfono con sonido y el filtro de spam apagado.</span></label>
+      <label><input type="checkbox"><span>Salir a las 16:45 en auto sin TAG, o 16:30 en metro: Línea 5 hasta Baquedano, Línea 1 hasta Tobalaba, y micro por Avenida Vitacura.</span></label>
+      <label><input type="checkbox"><span>Llegar a las 17:45 y preguntar por Felipe Jiménez.</span></label>
+      <label><input type="checkbox"><span>Vuelta: la micro 405 corre las 24 horas por Avenida Vitacura y te deja en Pajaritos, en el paradero 10 o en Las Parcelas.</span></label>
+    </div>
+    <div class="tip">Al llegar, mira la sala con ojos de capitán: cuántas mesas, cómo está la terraza, cómo atienden. Te sirve para comentar algo concreto en la entrevista.</div>
+  </div></section>
+</div>
 </main>
 
-<div class="player" role="region" aria-label="Reproductor">
+<div class="player" id="player" role="region" aria-label="Reproductor" hidden>
   <span class="now" id="now">Toca Escuchar en cualquier sección</span>
   <button class="btn" id="pp" disabled>Pausa</button>
   <button class="btn" id="stop" disabled>Detener</button>
   <select id="rate" aria-label="Velocidad"><option value="0.85">Lento</option><option value="1" selected>Normal</option><option value="1.2">Rápido</option></select>
 </div>
 
+<nav class="tabs" aria-label="Vistas">
+  <button data-go="estudiar" aria-current="page"><span class="ic"><svg><use href="#i-book"/></svg></span>Estudiar</button>
+  <button data-go="practicar" aria-current="false"><span class="ic"><svg><use href="#i-cards"/></svg></span>Practicar</button>
+  <button data-go="hoy" aria-current="false"><span class="ic"><svg><use href="#i-clock"/></svg></span>Hoy</button>
+</nav>
+
 <script>
 {
-const synth = window.speechSynthesis;
-const secs = [...document.querySelectorAll('main section')];
-const nowEl = document.getElementById('now'), pp = document.getElementById('pp'), stopB = document.getElementById('stop'), rateSel = document.getElementById('rate');
-document.querySelectorAll('.gl li[data-q]').forEach(li => { const a = document.createElement('a'); a.className = 'foto'; a.textContent = 'Ver fotos'; a.target = '_blank'; a.rel = 'noopener'; a.href = 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(li.dataset.q); li.append(' ', a); });
+/* ---------- utilidades ---------- */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+const fmt = n => '$' + n.toLocaleString('es-CL');
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const lc = s => s.charAt(0).toLowerCase() + s.slice(1);
+const icon = id => '<svg><use href="#' + id + '"/></svg>';
 
+/* ---------- tema ---------- */
+const root = document.documentElement;
+const savedTheme = store.get('romaria-theme', null);
+if (savedTheme) root.dataset.theme = savedTheme;
+$('#theme').addEventListener('click', () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  store.set('romaria-theme', root.dataset.theme);
+});
+
+/* ---------- vistas ---------- */
+function showView(name, top) {
+  $$('.view').forEach(v => v.hidden = v.dataset.view !== name);
+  $$('.tabs button').forEach(b => b.setAttribute('aria-current', b.dataset.go === name ? 'page' : 'false'));
+  store.set('romaria-tab', name);
+  if (top) window.scrollTo({top: 0});
+}
+const viewOf = el => el.closest('.view').dataset.view;
+$$('.tabs button').forEach(b => b.addEventListener('click', () => showView(b.dataset.go, true)));
+$$('[data-go-view]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); showView(b.dataset.goView, true); }));
+showView(store.get('romaria-tab', 'estudiar'), false);
+
+/* ---------- capítulos y avance ---------- */
+const secs = $$('main section');
+const done = new Set(store.get('romaria-done', []));
+const chapNav = $('#chapters');
+secs.forEach((s, i) => {
+  const t = s.querySelector('h2').textContent;
+  const a = document.createElement('a');
+  a.href = '#' + s.id; a.dataset.id = s.id;
+  a.innerHTML = '<span class="n">' + String(i + 1).padStart(2, '0') + '</span><span class="t">' + esc(t) + '</span><span class="m">' + (s.dataset.min || 2) + ' min</span><span class="ok">' + icon('i-check') + '</span>';
+  a.addEventListener('click', e => { e.preventDefault(); showView(viewOf(s)); s.scrollIntoView({block: 'start'}); });
+  chapNav.append(a);
+  const row = document.createElement('div'); row.className = 'done-row';
+  const b = document.createElement('button'); b.className = 'btn done'; b.dataset.id = s.id;
+  b.addEventListener('click', () => { done.has(s.id) ? done.delete(s.id) : done.add(s.id); store.set('romaria-done', [...done]); renderProgress(); });
+  row.append(b);
+  const nx = secs[i + 1];
+  const n = document.createElement('a'); n.className = 'next';
+  if (nx) { n.href = '#' + nx.id; n.textContent = 'Siguiente: ' + nx.querySelector('h2').textContent + ' →'; n.addEventListener('click', e => { e.preventDefault(); showView(viewOf(nx)); nx.scrollIntoView({block: 'start'}); }); }
+  else { n.href = '#'; n.textContent = 'Ir a practicar →'; n.addEventListener('click', e => { e.preventDefault(); showView('practicar', true); }); }
+  row.append(n);
+  s.querySelector('.wrap').append(row);
+});
+function renderProgress() {
+  const n = done.size, tot = secs.length;
+  $('#ringtx').textContent = n + '/' + tot;
+  $('#ringfg').style.strokeDashoffset = 106.8 * (1 - n / tot);
+  $('#metertx').textContent = n + ' de ' + tot + ' capítulos';
+  $('#meterbar').style.width = (100 * n / tot) + '%';
+  $$('#chapters a').forEach(a => a.classList.toggle('is-done', done.has(a.dataset.id)));
+  $$('.done').forEach(b => { const d = done.has(b.dataset.id); b.setAttribute('aria-pressed', d); b.innerHTML = d ? icon('i-check') + 'Estudiado' : 'Marcar como estudiado'; });
+}
+renderProgress();
+
+/* ---------- cuenta regresiva ---------- */
+const CITA = new Date('2026-11-24T18:00:00-03:00');
+function countdown() {
+  const ms = CITA - Date.now();
+  let txt;
+  if (ms > 0) {
+    const h = Math.floor(ms / 3600000), m = Math.floor(ms % 3600000 / 60000);
+    txt = h >= 24 ? 'Faltan ' + Math.floor(h / 24) + ' d ' + (h % 24) + ' h' : 'Faltan ' + (h ? h + ' h ' : '') + m + ' min';
+  } else if (ms > -90 * 60000) txt = 'Es ahora. ¡Mucha suerte!';
+  else txt = 'Ya fue. Bien hecho por prepararte.';
+  $('#cd').textContent = txt;
+  $$('.cdtext').forEach(e => e.textContent = 'Martes 24 · 18:00 · ' + txt.charAt(0).toLowerCase() + txt.slice(1));
+}
+countdown(); setInterval(countdown, 30000);
+
+/* ---------- checklist ---------- */
+try { const k = 'romaria-check'; const saved = JSON.parse(localStorage.getItem(k) || '[]');
+  $$('.check input').forEach((c, i) => { c.checked = !!saved[i]; c.addEventListener('change', () => { try { localStorage.setItem(k, JSON.stringify($$('.check input').map(x => x.checked))); } catch (e) {} }); });
+} catch (e) {}
+
+/* ---------- glosario (se lee antes de agregar enlaces) ---------- */
+const GLOS = $$('.gl li').map(li => { const c = li.cloneNode(true); const t = c.querySelector('b').textContent.trim(); c.querySelector('b').remove(); return {t, d: c.textContent.replace(/^\s*:\s*/, '').trim()}; }).filter(g => g.d.length > 3);
+
+/* ---------- fotos ---------- */
+$$('.gl li[data-q]').forEach(li => { const a = document.createElement('a'); a.className = 'foto'; a.textContent = 'Ver fotos'; a.target = '_blank'; a.rel = 'noopener'; a.href = 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(li.dataset.q); li.append(' ', a); });
 const wiki = async (lang, t) => { try { const r = await fetch('https://' + lang + '.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(t)); if (!r.ok) return null; const j = await r.json(); return (j.thumbnail && j.thumbnail.source) || null; } catch (e) { return null; } };
 const photo = async el => { let u = await wiki('es', el.dataset.w); if (!u && el.dataset.e) u = await wiki('en', el.dataset.e); if (!u) return; const img = document.createElement('img'); img.src = u; img.alt = ''; img.loading = 'lazy'; if (el.tagName === 'FIGURE') el.prepend(img); else { img.className = 'ph'; el.prepend(img); } };
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); photo(e.target); } }), {rootMargin: '400px'});
-document.querySelectorAll('[data-w]').forEach(el => io.observe(el));
-const icon = '<svg viewBox="0 0 16 16"><path d="M4 2v12l10-6z"/></svg>';
+$$('[data-w]').forEach(el => io.observe(el));
+
+/* ---------- lectura en voz alta ---------- */
+const synth = window.speechSynthesis;
+const player = $('#player'), nowEl = $('#now'), pp = $('#pp'), stopB = $('#stop'), rateSel = $('#rate');
 secs.forEach((s, i) => {
   const b = document.createElement('button');
-  b.className = 'btn listen'; b.innerHTML = icon + 'Escuchar esta sección';
+  b.className = 'btn listen'; b.innerHTML = icon('i-ear') + 'Escuchar este capítulo';
   b.addEventListener('click', () => play(i, false));
   s.querySelector('h2').after(b);
 });
@@ -399,9 +760,9 @@ const pickVoice = () => {
 if (synth) { pickVoice(); synth.onvoiceschanged = pickVoice; }
 const textOf = el => {
   const c = el.cloneNode(true);
-  c.querySelectorAll('button, .note, .foto').forEach(n => n.remove());
+  c.querySelectorAll('button, .note, .foto, .done-row, .btn-row, .eyebrow').forEach(n => n.remove());
   c.querySelectorAll('summary').forEach(n => n.append('. '));
-  c.querySelectorAll('li, p, h2, h3, label, .say, .tip, dt, dd').forEach(n => n.append('. '));
+  c.querySelectorAll('li, p, h2, h3, label, .say, .tip, dt, dd, .t').forEach(n => n.append('. '));
   return c.textContent.replace(/\s+/g, ' ').replace(/(\.\s*){2,}/g, '. ').trim();
 };
 const chunk = t => {
@@ -414,15 +775,26 @@ const chunk = t => {
 };
 let queue = [], idx = 0, cur = -1, chain = false, paused = false, run = 0;
 const mark = i => { secs.forEach(s => s.classList.remove('speaking')); if (i >= 0) secs[i].classList.add('speaking'); };
-function play(i, all) {
-  if (!synth) { nowEl.textContent = 'Tu navegador no permite leer en voz alta.'; return; }
-  synth.cancel(); run++; paused = false; chain = all; cur = i;
-  const intro = (i === 0 && all) ? textOf(document.querySelector('.ticket')) + '. ' : '';
-  queue = chunk(intro + textOf(secs[i])); idx = 0;
-  nowEl.textContent = 'Escuchando: ' + secs[i].querySelector('h2').textContent;
+function startQueue(label, text) {
+  synth.cancel(); run++; paused = false;
+  queue = chunk(text); idx = 0;
+  nowEl.innerHTML = 'Escuchando: <b>' + esc(label) + '</b>';
+  player.hidden = false; document.body.classList.add('playing');
   pp.disabled = stopB.disabled = false; pp.textContent = 'Pausa'; pp.classList.add('on');
-  mark(i); secs[i].scrollIntoView({block: 'start'});
   next(run);
+}
+function play(i, all) {
+  if (!synth) { player.hidden = false; nowEl.textContent = 'Tu navegador no permite leer en voz alta.'; return; }
+  chain = all; cur = i;
+  const intro = (i === 0 && all) ? textOf($('.ticket')) + '. ' : '';
+  showView(viewOf(secs[i]));
+  mark(i); secs[i].scrollIntoView({block: 'start'});
+  startQueue(secs[i].querySelector('h2').textContent, intro + textOf(secs[i]));
+}
+function say(label, text) {
+  if (!synth) { player.hidden = false; nowEl.textContent = 'Tu navegador no permite leer en voz alta.'; return; }
+  chain = false; cur = -1; mark(-1);
+  startQueue(label, text);
 }
 function next(r) {
   if (r !== run) return;
@@ -438,7 +810,7 @@ function next(r) {
 }
 function stop() {
   run++; if (synth) synth.cancel(); paused = false; mark(-1);
-  nowEl.textContent = 'Toca Escuchar en cualquier sección';
+  player.hidden = true; document.body.classList.remove('playing');
   pp.disabled = stopB.disabled = true; pp.textContent = 'Pausa'; pp.classList.remove('on');
 }
 pp.addEventListener('click', () => {
@@ -447,13 +819,199 @@ pp.addEventListener('click', () => {
   else { synth.pause(); paused = true; pp.textContent = 'Seguir'; pp.classList.remove('on'); }
 });
 stopB.addEventListener('click', stop);
-document.getElementById('all').addEventListener('click', () => play(0, true));
-rateSel.addEventListener('change', () => { if (cur >= 0 && !pp.disabled) { const keep = Math.max(0, idx - 1); const r = ++run; synth.cancel(); idx = keep; setTimeout(() => next(r), 50); } });
-try { const k = 'romaria-check'; const saved = JSON.parse(localStorage.getItem(k) || '[]');
-  document.querySelectorAll('.check input').forEach((c, i) => { c.checked = !!saved[i]; c.addEventListener('change', () => { try { localStorage.setItem(k, JSON.stringify([...document.querySelectorAll('.check input')].map(x => x.checked))); } catch (e) {} }); });
-} catch (e) {}
+$('#all').addEventListener('click', () => play(0, true));
+rateSel.addEventListener('change', () => { if (!pp.disabled) { const keep = Math.max(0, idx - 1); const r = ++run; synth.cancel(); idx = keep; setTimeout(() => next(r), 50); } });
+
+/* ---------- datos para practicar (carta oficial, 24-11-2026) ---------- */
+const PLATOS = [
+  {n:'Burrata', c:'Entrada', i:'Horneada con tomate cherry, albahaca, aceite de oliva y masa de pizza', p:17900},
+  {n:'Tabla de prosciutto', c:'Entrada', i:'200 gramos de prosciutto crudo con masa de pizza', p:17900},
+  {n:'Tartar de atún', c:'Entrada', i:'Atún con palta y pimentones, salsa teriyaki y sésamo, con tostadas', p:15900},
+  {n:'Atún mediterráneo', c:'Entrada', i:'Atún ahumado sellado en sésamo, mix verde, palta, tomate cherry, rabanitos y teriyaki', p:15900},
+  {n:'Carpaccio de salmón', c:'Entrada', i:'Salmón, rúcula, alcaparras y parmesano, con tostadas', p:13900},
+  {n:'Pinchos caprese', c:'Entrada', i:'Bocconcini de mozzarella, tomate cherry y albahaca', p:12900},
+  {n:'Pinchos Gamberetti', c:'Entrada', i:'Camarones grillados con salsa de ají amarillo y chimichurri', p:10900},
+  {n:'Palos de ajo', c:'Entrada', i:'Masa con mantequilla de ajo, parmesano y salsa de tomate', p:7900},
+  {n:'Romaria', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, ricotta, queso de cabra, jamón cocido y albahaca', p:13900},
+  {n:'Margarita Romaria', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, 125 g de mozzarella di bufala, albahaca y tomate cherry', p:16900},
+  {n:'Don Alfredo', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, prosciutto, rúcula y escamas de grana padano', p:16900},
+  {n:'Mechada', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, carne mechada y palta', p:16900},
+  {n:'Pepe Cipolla', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, carne mechada, pimentón verde y cebolla morada', p:14900},
+  {n:'Gamberetti', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, camarones grillados, rúcula y tomate cherry', p:15900},
+  {n:'Antonino', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, camarones, tomate cherry y zucchini', p:15900},
+  {n:'Funghi Tartufo', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, champiñones y aceite de trufa', p:12900},
+  {n:'Fugazul', c:'Pizza', pz:1, i:'Mozzarella, cebolla caramelizada y queso azul', p:11900},
+  {n:'Deliciosa', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, queso de cabra, rúcula y tomate seco', p:12900},
+  {n:'Luzia', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, chorizo riojano, aceitunas negras y pimentón asado', p:13900},
+  {n:'Norma', c:'Pizza', pz:1, i:'Pomodoro, mozzarella, berenjenas asadas, ricotta y albahaca', p:11900},
+  {n:'Margarita', c:'Pizza', pz:1, i:'Pomodoro, mozzarella y albahaca', p:9900},
+  {n:'Pasta al ají amarillo', c:'Pasta', i:'Camarones y champiñones flambeados al pisco', p:14900},
+  {n:'Tagliatelle al nero', c:'Pasta', i:'Pasta con tinta de calamar y camarones al ajillo', p:12900},
+  {n:'Tiramisú', c:'Postre', i:'Con mascarpone italiano', p:6900},
+  {n:'Suspiro Romaria', c:'Postre', i:'Suspiro clásico con toques de maracuyá', p:6900},
+  {n:'Panacota', c:'Postre', i:'Con salsa de frambuesa o maracuyá', p:5900}
+];
+const COCTELES = [
+  {n:'La Gringa', i:'Gin, maracuyá, limón y Red Bull amarillo', p:8900, x:'También en jarra'},
+  {n:'La Trampa', i:'Gin, piña, pepino, albahaca y limón', p:8900},
+  {n:'Sour Romaría', i:'Pisco peruano, Campari, maracuyá y jarabe de canela', p:6900},
+  {n:'Il Capo', i:'Jack Daniel\'s, Saint Germain, jarabe de romero y limón', p:8900},
+  {n:'Pomegroni', i:'Gin, pomelo, Campari, vermut rosso y tónica', p:7900},
+  {n:'Espojito', i:'Espumante, limón, limón de pica y menta', p:6400, x:'También en jarra'},
+  {n:'La Atrevida', i:'Tequila, Aperol, triple sec, mango y maracuyá', p:7900},
+  {n:'Sixtina', i:'Tequila, pomelo, limón, mango y ginger ale', p:7900},
+  {n:'Solare', i:'Gin, Aperol, piña, limón y gotas de angostura', p:5900},
+  {n:'Traviata', i:'Pisco, limón, frambuesa y jengibre', p:7200},
+  {n:'Amalfitano', i:'Gin, limón, pomelo, naranja, miel y tónica', p:7900},
+  {n:'Pisco sour', i:'El clásico de la carta', p:4300}
+];
+const MARIDA = [
+  {a:'Margarita Romaria o burrata', q:'la Margarita Romaria o la burrata', b:'Sauvignon Blanc Amaral de Leyda, o espumante por copa', w:'Fresco y ácido: limpia la cremosidad de la bufala.'},
+  {a:'Don Alfredo o tabla de prosciutto', q:'la Don Alfredo o la tabla de prosciutto', b:'Pinot Noir Casa Marín', w:'Tinto liviano: no aplasta el prosciutto ni el grana.'},
+  {a:'Pepe Cipolla o Mechada', q:'la Pepe Cipolla o la Mechada', b:'Carmenere Chamán o Malbec Séptima', w:'Tintos con cuerpo para la carne mechada.'},
+  {a:'Pastas al ají amarillo', q:'las pastas al ají amarillo', b:'Sour Romaría o Chilcano', w:'Conversan con el pisco del flambeado.'},
+  {a:'Un grupo en la terraza', q:'a un grupo en la terraza', b:'Jarra de La Gringa o de Espojito', w:'Abre la mesa y sube el ticket.'},
+  {a:'El cierre de la comida', q:'el cierre de la comida', b:'Tiramisú con espresso, o un limoncello o grappa', w:'Postre, café y bajativo.'}
+];
+const SIM = $$('#preguntas details, #casos details').map(d => ({
+  q: d.querySelector('summary').textContent,
+  a: [...d.querySelectorAll('p:not(.note)')].map(p => p.textContent),
+  n: [...d.querySelectorAll('p.note')].map(p => p.textContent),
+  caso: !!d.closest('#casos')
+}));
+
+/* ---------- modos ---------- */
+$$('.seg button').forEach(b => b.addEventListener('click', () => {
+  $$('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  $$('.mode').forEach(m => m.hidden = m.dataset.mode !== b.dataset.mode);
+  if (b.dataset.mode === 'quiz' && !quiz.started) quizIntro();
+  if (b.dataset.mode === 'sim' && !sim.started) simIntro();
+}));
+
+/* ---------- tarjetas ---------- */
+const DECKS = {
+  carta: PLATOS.map(p => ({id:'c:' + p.n, cat:p.c, f:p.n, b:p.i, x:fmt(p.p)})),
+  barra: COCTELES.map(c => ({id:'b:' + c.n, cat:'Cóctel', f:c.n, b:c.i + (c.x ? '. ' + c.x : ''), x:fmt(c.p)})),
+  ingredientes: GLOS.map(g => ({id:'g:' + g.t, cat:'Ingrediente o término', f:g.t, b:g.d})),
+  maridajes: MARIDA.map(m => ({id:'m:' + m.a, cat:'¿Qué recomiendas con…?', f:m.a, b:m.b, x:m.w}))
+};
+const known = new Set(store.get('romaria-known', []));
+let deck = 'carta', fq = [];
+function loadDeck(d) {
+  deck = d;
+  $$('.decks button').forEach(b => b.setAttribute('aria-pressed', b.dataset.deck === d));
+  fq = shuffle(DECKS[d].filter(c => !known.has(c.id)));
+  renderCard();
 }
+function renderCard() {
+  const all = DECKS[deck], k = all.filter(c => known.has(c.id)).length;
+  $('#fleft').textContent = fq.length ? fq.length + ' por aprender' : 'Mazo completo';
+  $('#fknown').textContent = k + ' de ' + all.length + ' sabidas';
+  $('#fbar').style.width = (100 * k / all.length) + '%';
+  const st = $('#fstage');
+  if (!fq.length) {
+    st.innerHTML = '<div class="endcard"><p class="eyebrow">Bravo</p><div class="big">' + all.length + '/' + all.length + '</div><p>Te sabes todo este mazo. Prueba otro o pásate al quiz.</p><div class="btn-row" style="justify-content:center"><button class="btn btn-olive" id="freset">Repasar de nuevo</button><button class="btn btn-line" id="fgoquiz">Ir al quiz</button></div></div>';
+    $('#freset').onclick = () => { all.forEach(c => known.delete(c.id)); store.set('romaria-known', [...known]); loadDeck(deck); };
+    $('#fgoquiz').onclick = () => $('.seg [data-mode=quiz]').click();
+    return;
+  }
+  const c = fq[0];
+  st.innerHTML = '<div class="flash" tabindex="0" role="button" aria-label="Dar vuelta la tarjeta"><div class="flash-in">' +
+    '<div class="face front"><svg class="wheat"><use href="#wheat"/></svg><p class="eyebrow">' + esc(c.cat) + '</p><div class="fname">' + esc(c.f) + '</div><p class="hint">Toca para dar vuelta</p></div>' +
+    '<div class="face back"><p class="eyebrow">' + esc(c.f) + '</p><div class="fback">' + esc(c.b) + '</div>' + (c.x ? '<div class="fextra">' + esc(c.x) + '</div>' : '') + '</div>' +
+    '</div></div>' +
+    '<div class="fact"><button class="btn again" id="fagain">Repasar</button><button class="btn btn-olive" id="fknow">' + icon('i-check') + 'Me la sé</button></div>' +
+    '<div class="btn-row" style="margin-top:10px;justify-content:center"><button class="btn btn-line" id="fsay">' + icon('i-ear') + 'Escuchar</button></div>';
+  const fl = st.querySelector('.flash');
+  const flip = () => fl.classList.toggle('flipped');
+  fl.addEventListener('click', flip);
+  fl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+  $('#fagain').onclick = () => { fq.push(fq.shift()); renderCard(); };
+  $('#fknow').onclick = () => { known.add(c.id); store.set('romaria-known', [...known]); fq.shift(); renderCard(); };
+  $('#fsay').onclick = () => say(c.f, c.f + '. ' + c.b + (c.x ? '. ' + c.x.replace('$', '') + (c.x.startsWith('$') ? ' pesos' : '') : ''));
+}
+$$('.decks button').forEach(b => b.addEventListener('click', () => loadDeck(b.dataset.deck)));
+loadDeck('carta');
+
+/* ---------- quiz ---------- */
+const quiz = {started:false, n:0, score:0, res:[], q:null, total:10};
+const uniq = (arr, k) => { const s = new Set(), o = []; for (const a of arr) { const v = k(a); if (!s.has(v)) { s.add(v); o.push(a); } } return o; };
+function options(correct, pool) { return shuffle([correct, ...shuffle(pool.filter(x => x !== correct)).slice(0, 3)]); }
+const GEN = [
+  () => { const p = pick(PLATOS); const prices = [...new Set(PLATOS.map(x => fmt(x.p)))]; return {q:'¿Cuánto cuesta ' + (p.pz ? 'la pizza ' : '') + p.n + '?', ok:fmt(p.p), opts:options(fmt(p.p), prices), ex:p.n + ': ' + lc(p.i) + '. ' + fmt(p.p) + '.'}; },
+  () => { const pz = PLATOS.filter(x => x.pz); const p = pick(pz); const ing = p.i.replace(/^(Pomodoro, )?mozzarella,? (y )?/i, ''); return {q:'¿Qué pizza lleva ' + ing.charAt(0).toLowerCase() + ing.slice(1) + '?', ok:p.n, opts:options(p.n, pz.map(x => x.n)), ex:p.n + ': ' + lc(p.i) + '. ' + fmt(p.p) + '.'}; },
+  () => { const c = pick(COCTELES.filter(x => x.n !== 'Pisco sour')); return {q:'¿Qué lleva el cóctel ' + c.n + '?', ok:c.i, opts:options(c.i, COCTELES.filter(x => x.n !== 'Pisco sour').map(x => x.i)), ex:c.n + ': ' + lc(c.i) + '. ' + fmt(c.p) + '.'}; },
+  () => { const m = pick(MARIDA); return {q:'Te piden algo para acompañar ' + (m.q || 'la ' + m.a) + '. ¿Qué recomiendas?', ok:m.b, opts:options(m.b, MARIDA.map(x => x.b)), ex:m.b + '. ' + m.w}; },
+  () => { const g = pick(GLOS); const first = s => s.split(/(?<=\.)\s/)[0]; const ok = first(g.d); return {q:'¿Qué es «' + g.t + '»?', ok, opts:options(ok, uniq(GLOS, x => first(x.d)).map(x => first(x.d))), ex:g.t + ': ' + g.d}; }
+];
+function quizIntro() {
+  const best = store.get('romaria-best', null);
+  $('#qstage').innerHTML = '<div class="endcard"><p class="eyebrow">Quiz de la carta</p><div class="big">10</div><p>preguntas sobre precios, pizzas, cócteles, maridajes e ingredientes. Cada vez salen distintas.' + (best !== null ? '<br><span class="note">Tu mejor marca: ' + best + ' de 10.</span>' : '') + '</p><button class="btn btn-olive" id="qstart">' + icon('i-play') + 'Empezar</button></div>';
+  $('#qstart').onclick = quizStart;
+}
+function quizStart() { quiz.started = true; quiz.n = 0; quiz.score = 0; quiz.res = []; quiz.seen = new Set(); quizNext(); }
+function quizNext() {
+  if (quiz.n >= quiz.total) return quizEnd();
+  let q, tries = 0;
+  do { q = GEN[quiz.n % GEN.length](); tries++; } while (quiz.seen.has(q.q) && tries < 20);
+  quiz.seen.add(q.q); quiz.q = q;
+  const dots = Array.from({length: quiz.total}, (_, i) => '<i class="' + (quiz.res[i] === true ? 'ok' : quiz.res[i] === false ? 'bad' : i === quiz.n ? 'cur' : '') + '"></i>').join('');
+  $('#qstage').innerHTML = '<div class="qhead">' + dots + '</div><p class="eyebrow">Pregunta ' + (quiz.n + 1) + ' de ' + quiz.total + '</p><div class="qtext">' + esc(q.q) + '</div>' +
+    q.opts.map((o, i) => '<button class="opt" data-i="' + i + '">' + esc(o) + '</button>').join('') + '<div id="qafter"></div>';
+  $$('#qstage .opt').forEach(b => b.addEventListener('click', () => quizAnswer(b)));
+}
+function quizAnswer(b) {
+  const q = quiz.q, chosen = q.opts[+b.dataset.i], ok = chosen === q.ok;
+  $$('#qstage .opt').forEach(x => { x.disabled = true; if (q.opts[+x.dataset.i] === q.ok) x.classList.add('ok'); });
+  if (!ok) b.classList.add('bad');
+  quiz.res[quiz.n] = ok; if (ok) quiz.score++;
+  $('#qafter').innerHTML = '<div class="expl"><b>' + (ok ? '¡Correcto!' : 'No era esa') + '</b><br>' + esc(q.ex) + '</div><div class="btn-row"><button class="btn btn-olive" id="qnext">' + (quiz.n + 1 < quiz.total ? 'Siguiente' : 'Ver resultado') + '</button><button class="btn btn-line" id="qsay">' + icon('i-ear') + 'Escuchar</button></div>';
+  $('#qnext').onclick = () => { quiz.n++; quizNext(); window.scrollTo({top: $('.pv').offsetTop - 60}); };
+  $('#qsay').onclick = () => say('Quiz', q.q + ' ' + q.ex);
+}
+function quizEnd() {
+  const s = quiz.score, best = Math.max(s, store.get('romaria-best', 0)); store.set('romaria-best', best);
+  const msg = s >= 9 ? 'Nivel capitán. Llegas listo.' : s >= 7 ? 'Muy bien. Repasa las que fallaste y quedas impecable.' : s >= 5 ? 'Vas bien. Una vuelta más por las tarjetas y lo subes.' : 'Dale una vuelta a las tarjetas de la carta y vuelve a intentarlo.';
+  $('#qstage').innerHTML = '<div class="endcard"><p class="eyebrow">Resultado</p><div class="big">' + s + '/10</div><p>' + msg + '<br><span class="note">Tu mejor marca: ' + best + ' de 10.</span></p><div class="btn-row" style="justify-content:center"><button class="btn btn-olive" id="qagain">Otra ronda</button><button class="btn btn-line" id="qcards">Ir a las tarjetas</button></div></div>';
+  $('#qagain').onclick = quizStart;
+  $('#qcards').onclick = () => $('.seg [data-mode=tarjetas]').click();
+}
+
+/* ---------- simulador de entrevista ---------- */
+const sim = {started:false, order:[], i:0, t:null, left:60};
+const SIM_T = 60, CIRC = 2 * Math.PI * 32;
+function simIntro() {
+  $('#sstage').innerHTML = '<div class="endcard"><p class="eyebrow">Simulador de entrevista</p><div class="big">' + SIM.length + '</div><p>preguntas y casos reales. Escucha la pregunta, responde en voz alta en un minuto y compara con la respuesta modelo.</p><button class="btn btn-olive" id="sstart">' + icon('i-play') + 'Empezar</button></div>';
+  $('#sstart').onclick = () => { sim.started = true; sim.order = shuffle(SIM.map((_, i) => i)); sim.i = 0; simShow(); };
+}
+function simShow() {
+  clearInterval(sim.t); sim.left = SIM_T;
+  const s = SIM[sim.order[sim.i % sim.order.length]];
+  $('#sstage').innerHTML = '<p class="eyebrow">' + (s.caso ? 'Caso de servicio' : 'Pregunta') + ' · ' + ((sim.i % sim.order.length) + 1) + ' de ' + SIM.length + '</p><div class="simq">' + esc(s.q) + '</div>' +
+    '<div class="timer"><svg viewBox="0 0 76 76"><circle class="bgc" cx="38" cy="38" r="32"/><circle class="fg" id="sfg" cx="38" cy="38" r="32" stroke-dasharray="' + CIRC + '" stroke-dashoffset="0"/></svg><div><div class="tt" id="stt">1:00</div><div class="note">para responder en voz alta</div></div></div>' +
+    '<div class="btn-row"><button class="btn btn-olive" id="sgo">' + icon('i-play') + 'Responder</button><button class="btn btn-line" id="ssay">' + icon('i-ear') + 'Escuchar la pregunta</button></div>' +
+    '<div id="sans"></div>';
+  $('#ssay').onclick = () => say('Pregunta', s.q);
+  $('#sgo').onclick = () => {
+    if (sim.t) { clearInterval(sim.t); sim.t = null; reveal(); return; }
+    $('#sgo').innerHTML = 'Terminé';
+    sim.t = setInterval(() => {
+      sim.left--; const m = Math.floor(sim.left / 60), sec = sim.left % 60;
+      $('#stt').textContent = m + ':' + String(sec).padStart(2, '0');
+      $('#sfg').style.strokeDashoffset = CIRC * (1 - sim.left / SIM_T);
+      if (sim.left <= 0) { clearInterval(sim.t); sim.t = null; reveal(); }
+    }, 1000);
+  };
+  const reveal = () => {
+    $('#sgo').remove();
+    $('#sans').innerHTML = '<div class="answer"><p class="eyebrow">Respuesta modelo</p>' + s.a.map(p => '<p>' + esc(p) + '</p>').join('') + s.n.map(p => '<p class="note">' + esc(p) + '</p>').join('') + '</div>' +
+      '<div class="btn-row"><button class="btn btn-olive" id="snext">Otra pregunta</button><button class="btn btn-line" id="ssayans">' + icon('i-ear') + 'Escuchar la respuesta</button></div>';
+    $('#snext').onclick = () => { sim.i++; simShow(); };
+    $('#ssayans').onclick = () => say('Respuesta modelo', s.a.join(' '));
+  };
+}
+}
+if ('serviceWorker' in navigator) { addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {})); }
 </script>
-<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body>
 </html>
