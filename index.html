@@ -236,6 +236,15 @@ details p{margin:8px 0 14px}
 .timer.low .tt{color:var(--terra)}.timer.low .fg{stroke:var(--terra)}
 .rateq{margin:22px 0 8px}
 
+/* Explicación al pararse sobre un ingrediente */
+.gterm{text-decoration:underline dotted color-mix(in srgb,var(--olive) 75%,transparent);text-decoration-thickness:1.5px;text-underline-offset:4px;cursor:help;border-radius:4px}
+.gterm:hover,.gterm.on{background:color-mix(in srgb,var(--olive) 18%,transparent)}
+.gterm:focus-visible{outline:2px solid var(--olive);outline-offset:2px}
+.gpop{position:fixed;z-index:40;width:min(320px,calc(100vw - 24px));background:#283019;color:#f6f2e6;border-radius:16px;padding:14px 16px;box-shadow:0 18px 40px -12px rgba(0,0,0,.55);font:400 15px/1.5 var(--sans);pointer-events:none}
+.gpop b{display:block;font:600 19px/1.2 var(--serif);color:#e3ebcc;margin-bottom:4px}
+.gpop img{float:right;width:72px;height:72px;object-fit:cover;border-radius:12px;margin:0 0 6px 12px}
+.gpop::after{content:"";display:block;clear:both}
+
 /* Reproductor y pestañas */
 .player{position:fixed;left:10px;right:10px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:29;background:#283019;color:#f6f2e6;border-radius:20px;padding:10px 12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;box-shadow:0 18px 40px -12px rgba(0,0,0,.5);max-width:720px;margin:0 auto}
 .player[hidden]{display:none}
@@ -797,7 +806,7 @@ try { const k = 'romaria-check'; const saved = JSON.parse(localStorage.getItem(k
 } catch (e) {}
 
 /* ---------- glosario (se lee antes de agregar enlaces) ---------- */
-const GLOS = $$('.gl li').map(li => { const c = li.cloneNode(true); const t = c.querySelector('b').textContent.trim(); c.querySelector('b').remove(); return {t, d: c.textContent.replace(/^\s*:\s*/, '').trim()}; }).filter(g => g.d.length > 3);
+const GLOS = $$('.gl li').map(li => { const c = li.cloneNode(true); const t = c.querySelector('b').textContent.trim(); c.querySelector('b').remove(); return {t, d: c.textContent.replace(/^\s*:\s*/, '').trim(), w: li.dataset.w, e: li.dataset.e}; }).filter(g => g.d.length > 3);
 
 /* ---------- fotos ---------- */
 $$('.gl li[data-q]').forEach(li => { const a = document.createElement('a'); a.className = 'foto'; a.textContent = 'Ver fotos'; a.target = '_blank'; a.rel = 'noopener'; a.href = 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(li.dataset.q); li.append(' ', a); });
@@ -1184,6 +1193,73 @@ XP.forEach(x => {
 });
 $('#xpsay').addEventListener('click', () => say('Repaso exprés', XP.map(x => x.s.querySelector('h2').textContent + '. ' + x.k.textContent).join(' ')));
 $('#goxp').addEventListener('click', () => { showView('hoy'); $('#xp').scrollIntoView({block: 'start'}); });
+
+/* ---------- explicación al pararse sobre un ingrediente ----------
+   Cada palabra del glosario que aparece en los capítulos queda subrayada con puntos:
+   con el mouse encima, o con un toque en el teléfono, sale su explicación en texto. */
+{
+  /* Otras formas en que aparece cada término en la carta (además de su nombre tal cual). */
+  const OTRAS = {
+    'Mozzarella di bufala': ['bufala'], 'Grana padano': ['grana'], 'Prosciutto crudo': ['prosciutto'], 'Salame italiano': ['salame'],
+    'Tocino o panceta': ['tocino', 'panceta'], 'Mechada': ['carne mechada'], 'Camarón ecuatoriano': ['camarones', 'camarón'],
+    'Salmón ahumado': ['salmón ahumado'], 'Alcachofa': ['alcachofas'], 'Berenjena asada': ['berenjenas asadas', 'berenjena'],
+    'Pomodoro basilico': ['pomodoro'], 'Alfredo': ['(?<!Don )alfredo'], 'Fettuccine y tagliatelle': ['fettuccine', 'tagliatelle'],
+    'Gnocchi': ['ñoquis'], 'Mocktail': ['mocktails'], 'Carignan y País': ['carignan'], 'Brut, Extra Brut y Rosé': ['extra brut', 'brut'],
+    'Tequila reposado o añejo': ['tequila reposado'], 'Pimentón asado': ['pimentón asado'], 'Queso de cabra': ['queso de cabra'], 'Suspiro': ['suspiro']
+  };
+  const rx = s => s.replace(/[.*+?^$()|[\]\\{}]/g, '\\$&');
+  const forms = [];
+  GLOS.forEach((g, i) => {
+    if (!/ y | o |,/.test(g.t) && g.t !== 'Alfredo') forms.push({s: rx(g.t), i, n: g.t.length});
+    (OTRAS[g.t] || []).forEach(a => forms.push({s: a.startsWith('(') ? a : rx(a), i, n: a.length}));
+  });
+  forms.sort((a, b) => b.n - a.n);
+  const re = new RegExp('(?<![\\p{L}])(?:' + forms.map(f => '(' + f.s + ')').join('|') + ')(?![\\p{L}])', 'giu');
+  const skip = 'button, a, h2, h3, summary, label, .eyebrow, .note, .done-row, .gterm, input';
+  secs.filter(s => s.id !== 'glosario').forEach(sec => {
+    const tw = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT), nodes = [];
+    while (tw.nextNode()) { const n = tw.currentNode; if (n.nodeValue.trim().length > 2 && !n.parentElement.closest(skip)) nodes.push(n); }
+    nodes.forEach(n => {
+      const txt = n.nodeValue; re.lastIndex = 0; let m, last = 0, frag = null;
+      while ((m = re.exec(txt))) {
+        const gi = forms[m.slice(1).findIndex(x => x !== undefined)].i;
+        frag = frag || document.createDocumentFragment();
+        frag.append(txt.slice(last, m.index));
+        const sp = document.createElement('span'); sp.className = 'gterm'; sp.tabIndex = 0; sp.dataset.g = gi; sp.setAttribute('role', 'button'); sp.setAttribute('aria-label', m[0] + ': ver explicación'); sp.textContent = m[0];
+        frag.append(sp); last = m.index + m[0].length;
+      }
+      if (frag) { frag.append(txt.slice(last)); n.replaceWith(frag); }
+    });
+  });
+  const pop = document.createElement('div'); pop.className = 'gpop'; pop.hidden = true; pop.setAttribute('role', 'tooltip'); document.body.append(pop);
+  const fotos = {};
+  let cur = null, at = 0;
+  const hide = () => { if (cur) cur.classList.remove('on'); cur = null; pop.hidden = true; };
+  const place = () => {
+    const r = cur.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
+    const x = Math.min(Math.max(12, r.left + r.width / 2 - pw / 2), innerWidth - pw - 12);
+    const up = r.top - ph - 10, y = up > 70 ? up : Math.min(r.bottom + 10, innerHeight - ph - 12);
+    pop.style.left = x + 'px'; pop.style.top = Math.max(8, y) + 'px';
+  };
+  const show = el => {
+    if (cur === el) return;
+    hide(); cur = el; at = Date.now(); el.classList.add('on');
+    const g = GLOS[+el.dataset.g];
+    pop.innerHTML = '<b>' + esc(g.t) + '</b>' + esc(g.d);
+    pop.hidden = false; place();
+    const put = u => { if (u && cur === el && !pop.querySelector('img')) { const im = document.createElement('img'); im.alt = ''; im.src = u; im.onload = () => { if (cur === el) place(); }; pop.prepend(im); } };
+    if (g.t in fotos) put(fotos[g.t]);
+    else if (g.w) (async () => { let u = await wiki('es', g.w); if (!u && g.e) u = await wiki('en', g.e); fotos[g.t] = u; put(u); })();
+  };
+  const term = e => e.target.closest ? e.target.closest('.gterm') : null;
+  document.addEventListener('pointerover', e => { if (e.pointerType === 'mouse') { const t = term(e); if (t) show(t); } });
+  document.addEventListener('pointerout', e => { if (e.pointerType === 'mouse' && term(e)) hide(); });
+  document.addEventListener('click', e => { const t = term(e); if (!t) return hide(); if (cur !== t) show(t); else if (Date.now() - at > 400) hide(); });
+  document.addEventListener('focusin', e => { const t = term(e); if (t && t.matches(':focus-visible')) show(t); });
+  document.addEventListener('focusout', e => { if (term(e)) hide(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
+  addEventListener('scroll', () => { if (cur) hide(); }, {passive: true});
+}
 
 /* ---------- buscador del glosario ---------- */
 const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
