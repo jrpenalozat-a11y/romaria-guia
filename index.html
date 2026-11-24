@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía entrevista Romaria</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#c63a24">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: directo, de cancha, como un briefing de capitán antes del servicio
+   IDEA: la libreta de comandas / el briefing pegado en la cocina
+   PICTURE: la tarjeta de la entrevista + el reproductor para escuchar
+   COLOUR and TYPE: rojo pomodoro dominante, verde albahaca de apoyo, tinta oscura; Archivo + Inter
+   LAYOUT: banda roja con la cita, índice, secciones en una columna, reproductor fijo abajo */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#141414);--ink:light-dark(#1b1b1b,#f1efe9);--soft:light-dark(#5b5b5b,#b9b5ac);
+--red:#c63a24;--redInk:#ffffff;--basil:light-dark(#2f6b3a,#7cc48a);--card:light-dark(#f6f4f1,#1f1f1f);--line:light-dark(#e3dfd8,#2d2d2d)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip;padding-bottom:120px}
+h1,h2,h3{font-family:Archivo,Inter,sans-serif;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,7vw,48px);font-weight:800}
+h2{font-size:clamp(24px,5vw,32px);font-weight:800;margin-bottom:12px}
+h3{font-size:18px;font-weight:700;margin:18px 0 6px}
+.band{padding:clamp(24px,4vw,56px) max(5vw,16px)}
+.wrap{max-width:760px;margin:0 auto}
+.hero{background:var(--red);color:var(--redInk)}
+.hero p{margin:10px 0 0;font-size:17px;opacity:.95}
+.ticket{margin-top:20px;background:#fff;color:#1b1b1b;border-radius:14px;padding:18px 18px 14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.ticket .t{font-family:Archivo;font-size:clamp(30px,8vw,44px);font-weight:800;color:var(--red);white-space:nowrap}
+.ticket dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0 0}
+.ticket dt{color:#666;font-size:14px}.ticket dd{margin:0;font-weight:600}
+.btn{appearance:none;border:0;border-radius:999px;min-height:44px;padding:0 18px;font:600 15px Inter,sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn svg{width:16px;height:16px;fill:currentColor}
+.btn:focus-visible{outline:3px solid var(--basil);outline-offset:2px}
+.primary{background:#1b1b1b;color:#fff}
+.hero .primary{background:#fff;color:var(--red);margin-top:18px}
+.listen{background:var(--card);color:var(--ink);border:1px solid var(--line);margin:4px 0 10px}
+.nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding:8px max(5vw,16px)}
+.nav a{flex:none;color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;padding:8px 12px;border-radius:999px;background:var(--card)}
+section{border-bottom:1px solid var(--line)}
+ul{padding-left:20px;margin:6px 0}li{margin:4px 0}
+.k{font-weight:600}
+.price{white-space:nowrap;color:var(--basil);font-weight:600}
+.tip{background:var(--card);border-left:4px solid var(--basil);border-radius:8px;padding:12px 14px;margin:12px 0}
+.say{background:var(--card);border-radius:10px;padding:12px 14px;margin:8px 0;font-style:italic}
+details{background:var(--card);border-radius:12px;margin:10px 0;padding:0 14px}
+summary{cursor:pointer;font-weight:600;padding:14px 0;min-height:44px}
+details[open] summary{border-bottom:1px solid var(--line);margin-bottom:8px}
+details p{margin:8px 0 14px}
+.note{font-size:13px;color:var(--soft)}
+.gal{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 0 10px}
+.gal figure{flex:none;width:150px;margin:0;scroll-snap-align:start}
+.gal img{width:150px;height:110px;object-fit:cover;border-radius:10px;display:block;background:var(--card)}
+.gal figcaption{font-size:13px;margin-top:4px;color:var(--soft)}
+.gl li{display:flow-root}.gl img.ph{float:left;width:64px;height:64px;object-fit:cover;border-radius:8px;margin:2px 12px 4px 0;background:var(--card)}
+.credit{font-size:12px;color:var(--soft)}
+.gl li{padding:6px 0;border-bottom:1px solid var(--line);list-style:none}.gl{padding-left:0}
+.foto{display:inline-flex;align-items:center;min-height:36px;margin-left:8px;padding:0 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--basil);font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.check input{width:22px;height:22px;flex:none;accent-color:var(--red);margin-top:2px}
+.player{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#1b1b1b;color:#fff;padding:10px max(4vw,12px) calc(10px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.player .now{flex:1 1 160px;font-size:14px;opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player .btn{background:#2c2c2c;color:#fff;padding:0 14px}
+.player .btn.on{background:var(--red)}
+.player select{min-height:44px;border-radius:999px;background:#2c2c2c;color:#fff;border:0;padding:0 12px;font:16px Inter}
+.speaking{outline:3px solid var(--red);outline-offset:6px;border-radius:6px}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+
+<header class="band hero" id="inicio">
+  <div class="wrap">
+    <h1>Entrevista en Romaria: guía de estudio</h1>
+    <p>Capitán de Servicio (o Garzón Senior). Léela o escúchala con los botones; el reproductor queda abajo.</p>
+    <div class="ticket" data-read>
+      <div class="t">Martes 24 · 18:00</div>
+      <dl>
+        <dt>Dónde</dt><dd>Av. Vitacura 3396, Casa 9, Vitacura</dd>
+        <dt>Preguntar por</dt><dd>Felipe Jiménez</dd>
+        <dt>Te citó</dt><dd>Isidora Carvallo</dd>
+        <dt>Teléfono</dt><dd>+56 9 5779 9515</dd>
+      </dl>
+    </div>
+    <p style="margin:14px 0 0"><a href="https://www.instagram.com/romariapizzeria/" target="_blank" rel="noopener" style="color:#fff;font-weight:600">Ver fotos reales de sus platos en Instagram</a> · <a href="https://gour.media/romaria/menu/" target="_blank" rel="noopener" style="color:#fff;font-weight:600">Carta oficial</a></p>
+    <button class="btn primary" id="all"><svg viewBox="0 0 16 16"><path d="M4 2v12l10-6z"/></svg>Escuchar toda la guía</button>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Secciones">
+  <a href="#romaria">El local</a><a href="#carta">Carta</a><a href="#barra">Barra y vinos</a><a href="#glosario">Ingredientes</a><a href="#venta">Venta sugestiva</a><a href="#capitan">El cargo</a><a href="#preguntas">Preguntas</a><a href="#casos">Casos</a><a href="#tuyas">Tus preguntas</a><a href="#dia">El día</a>
+</nav>
+
+<main>
+<section class="band" id="romaria"><div class="wrap">
+  <h2>Romaria en un minuto</h2>
+  <ul>
+    <li>Pizzería italiana de <span class="k">masa delgada</span> en Vitacura desde <span class="k">2015</span>. En Instagram se llaman Romaría Pizza and Bar.</li>
+    <li>Se definen como pizzas y pastas artesanales, con recetas auténticas y altos estándares de servicio.</li>
+    <li>Horario: lunes de 13:00 a 00:00; martes a viernes de 13:00 a 01:00; sábado de 9:30 a 01:00; domingo de 9:30 a 18:00. Fin de semana hay brunch.</li>
+    <li>Nota 4,5 en Google con más de mil opiniones. Unos 31 mil seguidores en Instagram.</li>
+    <li>Gasto por persona: entre 15 y 25 mil pesos.</li>
+    <li>Terraza, aceptan perros afuera y destacan por sus cócteles.</li>
+    <li>Lo que alaban los clientes: las pizzas y la rapidez del servicio. Lo que critican: precios algo altos y la atención a veces irregular. Ahí entra un buen capitán.</li>
+  </ul>
+  <div class="tip">Frase para la entrevista: «Revisé su carta y su barra. Me gusta que tengan coctelería de autor y jarras para la terraza: eso da mucho juego para subir el ticket».</div>
+</div></section>
+
+<section class="band" id="carta"><div class="wrap">
+  <h2>La carta del salón</h2>
+  <div class="gal"><figure data-w="Pizza_margarita" data-e="Pizza_Margherita"><figcaption>Pizza margarita</figcaption></figure><figure data-w="Burrata" data-e="Burrata"><figcaption>Burrata</figcaption></figure><figure data-w="Prosciutto" data-e="Prosciutto"><figcaption>Pizza con prosciutto y rúcula</figcaption></figure><figure data-w="Ñoquis" data-e="Gnocchi"><figcaption>Ñoquis</figcaption></figure><figure data-w="Tiramisú" data-e="Tiramisu"><figcaption>Tiramisú</figcaption></figure></div>
+  <h3>Entradas</h3>
+  <ul>
+    <li><span class="k">Burrata al horno</span> con tomate cherry, albahaca y masa de pizza: <span class="price">17.900 pesos</span>.</li>
+    <li><span class="k">Tabla de prosciutto</span>, 200 gramos con masa de pizza: <span class="price">17.900 pesos</span>.</li>
+    <li>Tartar de atún y Atún mediterráneo: <span class="price">15.900 pesos</span> cada uno.</li>
+    <li>Carpaccio de salmón: <span class="price">13.900 pesos</span>. Pinchos caprese: <span class="price">12.900 pesos</span>. Pinchos de camarón con ají amarillo: <span class="price">10.900 pesos</span>.</li>
+    <li>Bruschettas: salmón, prosciutto, tomate con ricotta, o la trilogía. Palos de ajo: <span class="price">7.900 pesos</span>. Sopas de tomate o zapallo.</li>
+  </ul>
+  <h3>Pizzas: las que tienes que saber</h3>
+  <ul>
+    <li><span class="k">Romaria</span>, la de la casa: tomate, mozzarella, ricotta, queso de cabra, jamón cocido y albahaca. <span class="price">13.900 pesos</span>.</li>
+    <li><span class="k">Margarita Romaria</span>: con 125 gramos de mozzarella di bufala y tomate cherry. <span class="price">16.900 pesos</span>.</li>
+    <li><span class="k">Don Alfredo</span>: prosciutto, rúcula y grana padano. <span class="price">16.900 pesos</span>.</li>
+    <li><span class="k">Mechada</span>: carne mechada y palta. <span class="price">16.900 pesos</span>. <span class="k">Pepe Cipolla</span>: mechada, pimentón verde y cebolla morada.</li>
+    <li>Con camarón: <span class="k">Gamberetti</span> y <span class="k">Antonino</span>, <span class="price">15.900 pesos</span>.</li>
+    <li>Otras: Funghi Tartufo con aceite de trufa, Fugazul con queso azul y cebolla caramelizada, Deliciosa con queso de cabra, Madonna, Capricciosa, Luzia con chorizo riojano.</li>
+    <li>Opción vegana: Norma, Del Huerto, Piero y Funghi Tartufo. La más barata es la Margarita, a <span class="price">9.900 pesos</span>.</li>
+  </ul>
+  <h3>Pastas artesanales</h3>
+  <ul>
+    <li>Gnocchi, fettuccine o spaghetti con la salsa que quieras: pomodoro, bolognesa, alfredo, pesto, cuatro quesos, salsa rosa, mechada.</li>
+    <li>La estrella: <span class="k">ají amarillo</span>, con camarones y champiñones flambeados al pisco. <span class="price">14.900 pesos</span>.</li>
+    <li><span class="k">Tagliatelle al nero</span>, pasta de tinta de calamar con camarones al ajo. Ravioli de espinaca y ricotta. Tortellini de mechada a la puttanesca. Lasaña bolognesa. Sorrentinos a la amatriciana.</li>
+  </ul>
+  <h3>Postres y agregados</h3>
+  <ul>
+    <li>Tiramisú con mascarpone, Suspiro Romaria con maracuyá, cheesecake de frambuesa, brownie con helado: <span class="price">6.900 pesos</span>. Panacota y mousse, más baratos.</li>
+    <li>Agregados por grupo: A <span class="price">1.300</span>, B <span class="price">1.900</span>, C <span class="price">2.100</span> y D <span class="price">2.400 pesos</span>. En el grupo D van prosciutto, camarón, salmón, anchoas y grana.</li>
+  </ul>
+  <p class="note">Carta revisada en gour.media/romaria el 24 de noviembre de 2026. Los precios pueden cambiar.</p>
+</div></section>
+
+<section class="band" id="barra"><div class="wrap">
+  <h2>Barra y vinos</h2>
+  <div class="gal"><figure data-w="Spritz" data-e="Spritz_(cocktail)"><figcaption>Aperol Spritz</figcaption></figure><figure data-w="Negroni" data-e="Negroni"><figcaption>Negroni</figcaption></figure><figure data-w="Pisco_sour" data-e="Pisco_sour"><figcaption>Pisco sour</figcaption></figure><figure data-w="Moscow_mule" data-e="Moscow_mule"><figcaption>Moscow mule</figcaption></figure><figure data-w="Sangría" data-e="Sangria"><figcaption>Sangría</figcaption></figure></div>
+  <h3>Coctelería de la casa</h3>
+  <ul>
+    <li><span class="k">La Gringa</span>: gin, maracuyá, limón y Red Bull amarillo. También en jarra.</li>
+    <li><span class="k">La Trampa</span>: gin, piña, pepino, albahaca y limón.</li>
+    <li><span class="k">Sour Romaría</span>: pisco peruano, Campari, maracuyá y jarabe de canela.</li>
+    <li><span class="k">Il Capo</span>: Jack Daniel's, Saint Germain y limón.</li>
+    <li><span class="k">Pomegroni</span>: gin, pomelo, Campari, vermut rosso y tónica.</li>
+    <li>Además: Sixtina y La Atrevida con tequila, Solare, Traviata, Amalfitano, Caipijager y Gin Fritz.</li>
+    <li>Jarras: Espojito, La Gringa y sangría. Spritz: Aperol, Campari, Ramazzotti, Saint Germain y Cranberry.</li>
+  </ul>
+  <h3>Lo demás</h3>
+  <ul>
+    <li>Schop: Stella Artois y Cusqueña. Cervezas: Austral, Kunstmann Torobayo, LOA, Peroni y Corona, también sin alcohol.</li>
+    <li>Clásicos: pisco sour desde <span class="price">4.300 pesos</span>, Espresso Martini, Carajillo, Negroni, Moscow Mule, Bloody Mary.</li>
+    <li>Mocktails: Fritz de pepino, Virgin Mary, MockThai, Zenzero.</li>
+    <li>Destilados destacados: gin The Botanist y Hendrick's, pisco Waqar, mezcal, tequila 1800 Cristalino.</li>
+  </ul>
+  <h3>Vinos</h3>
+  <ul>
+    <li>Por copa: tinto Premium, cabernet o carmenere, y blanco Gran Reserva.</li>
+    <li>Tintos: Undurraga T.H., Casa Marín Pinot Noir de Cartagena, Santa Cruz Chamán Carmenere, Bodega Séptima Malbec, Calcu Tiny Blocks, Errázuriz Max.</li>
+    <li>Blancos: Amaral de Leyda, Leyda Single Vineyard, Montes Limited Chardonnay.</li>
+    <li>Diferentes: Stark Haus Carignan y Doña Aurora País, del Maule.</li>
+    <li>Espumantes: Montes Sparkling Angel, el más caro, Viñamar y Undurraga Brut Rosé. Espumante por copa a <span class="price">3.900 pesos</span>.</li>
+  </ul>
+</div></section>
+
+<section class="band" id="glosario"><div class="wrap">
+  <h2>Ingredientes y términos</h2>
+  <p class="note">Fotos de referencia desde Wikipedia (no son de Romaria). Toca «Ver fotos» para ver más en Google.</p>
+  <h3>Quesos</h3>
+  <ul class="gl">
+    <li data-q="mozzarella fresca" data-w="Mozzarella" data-e="Mozzarella"><b>Mozzarella</b>: queso fresco de vaca que se derrite y estira. La base de casi todas las pizzas.</li>
+    <li data-q="mozzarella di bufala" data-w="Mozzarella_di_bufala_campana" data-e="Mozzarella_di_bufala_campana"><b>Mozzarella di bufala</b>: de leche de búfala, más cremosa y algo ácida. Se pone al final o casi cruda. Por eso la Margarita Romaria es más cara.</li>
+    <li data-q="burrata al horno" data-w="Burrata" data-e="Burrata"><b>Burrata</b>: una bolsa de mozzarella rellena de crema con hebras de queso. Al abrirla sale el centro cremoso. Romaria la sirve al horno con tomate cherry y masa de pizza.</li>
+    <li data-q="bocconcini mozzarella" data-w="Bocconcini" data-e="Bocconcini"><b>Bocconcini</b>: bolitas chicas de mozzarella, las de los pinchos caprese.</li>
+    <li data-q="grana padano escamas" data-w="Grana_padano" data-e="Grana_Padano"><b>Grana padano</b>: queso duro italiano madurado, primo del parmesano y más suave. Va rallado o en escamas.</li>
+    <li data-q="queso parmesano" data-w="Parmigiano-Reggiano" data-e="Parmigiano_Reggiano"><b>Parmesano</b>: duro, salado e intenso.</li>
+    <li data-q="ricotta queso" data-w="Ricota" data-e="Ricotta"><b>Ricotta</b>: requesón suave, cremoso y poco salado.</li>
+    <li data-q="queso de cabra" data-w="Queso_de_cabra" data-e="Goat_cheese"><b>Queso de cabra</b>: cremoso, ácido, de sabor marcado.</li>
+    <li data-q="queso azul gorgonzola" data-w="Queso_azul" data-e="Blue_cheese"><b>Queso azul</b>: con hongo azul, fuerte y salado. El de la Fugazul.</li>
+    <li data-q="queso gruyere" data-w="Gruyère_(queso)" data-e="Gruyère_cheese"><b>Gruyère</b>: suizo, dulzón, se funde muy bien.</li>
+    <li data-q="queso mantecoso chileno" data-w="Queso_mantecoso" data-e="Queso_mantecoso"><b>Mantecoso</b>: el queso chileno de siempre, suave.</li>
+    <li data-q="mascarpone" data-w="Mascarpone" data-e="Mascarpone"><b>Mascarpone</b>: crema de queso muy suave. Es la base del tiramisú.</li>
+  </ul>
+  <h3>Carnes y fiambres</h3>
+  <ul class="gl">
+    <li data-q="prosciutto crudo laminas" data-w="Prosciutto" data-e="Prosciutto"><b>Prosciutto crudo</b>: jamón curado en sal y secado al aire, no cocido. Va en láminas finas y se pone después del horno para que no se seque. Lo llevan la Don Alfredo y la tabla.</li>
+    <li data-q="jamon cocido" data-w="Jamón_cocido" data-e="Ham"><b>Jamón cocido</b>: el jamón común.</li>
+    <li data-q="salame italiano" data-w="Salami" data-e="Salami"><b>Salame italiano</b>: embutido curado y especiado.</li>
+    <li data-q="pepperoni pizza" data-w="Pepperoni" data-e="Pepperoni"><b>Pepperoni</b>: salame picante de estilo norteamericano.</li>
+    <li data-q="chorizo riojano" data-w="Chorizo_riojano" data-e="Chorizo"><b>Chorizo riojano</b>: chorizo español curado con pimentón, ahumado.</li>
+    <li data-q="panceta tocino" data-w="Panceta" data-e="Pancetta"><b>Tocino o panceta</b>: panza de cerdo.</li>
+    <li data-q="carne mechada" data-w="Carne_mechada" data-e="Shredded_beef"><b>Mechada</b>: carne de vacuno cocida lento y deshilachada.</li>
+  </ul>
+  <h3>Del mar</h3>
+  <ul class="gl">
+    <li data-q="camarones grillados" data-w="Litopenaeus_vannamei" data-e="Whiteleg_shrimp"><b>Camarón ecuatoriano</b>: camarón grande de criadero, aquí grillado.</li>
+    <li data-q="salmon ahumado" data-w="Salmón_ahumado" data-e="Smoked_salmon"><b>Salmón ahumado</b>: salmón curado y ahumado en frío.</li>
+    <li data-q="atun sellado sesamo" data-w="Tataki" data-e="Tataki"><b>Atún sellado</b>: dorado solo por fuera y rosado por dentro.</li>
+    <li data-q="tartar de atun" data-w="Tartar_(gastronomía)" data-e="Tartare"><b>Tartar</b>: pescado crudo picado y aliñado.</li>
+    <li data-q="carpaccio de salmon" data-w="Carpaccio" data-e="Carpaccio"><b>Carpaccio</b>: láminas muy finas de pescado o carne cruda.</li>
+    <li data-q="anchoas" data-w="Anchoa" data-e="Anchovies_as_food"><b>Anchoas</b>: pescado chico en salazón, muy salado.</li>
+  </ul>
+  <h3>Verduras, hierbas y aceites</h3>
+  <ul class="gl">
+    <li data-q="rucula" data-w="Eruca_vesicaria" data-e="Eruca_vesicaria"><b>Rúcula</b>: hoja verde, picante y amarga.</li>
+    <li data-q="albahaca fresca" data-w="Ocimum_basilicum" data-e="Basil"><b>Albahaca</b>: la hierba italiana por excelencia.</li>
+    <li data-q="alcaparras" data-w="Alcaparra" data-e="Caper"><b>Alcaparras</b>: botones de flor en salmuera, ácidos.</li>
+    <li data-q="corazon de alcachofa" data-w="Cynara_scolymus" data-e="Artichoke"><b>Alcachofa</b>: se usa el corazón, que es suave.</li>
+    <li data-q="berenjena asada" data-w="Solanum_melongena" data-e="Eggplant"><b>Berenjena asada</b>.</li>
+    <li data-q="zucchini" data-w="Cucurbita_pepo" data-e="Zucchini"><b>Zucchini</b>: zapallo italiano.</li>
+    <li data-q="pimenton asado" data-w="Pimiento_asado" data-e="Roasted_pepper"><b>Pimentón asado</b>: dulce y ahumado.</li>
+    <li data-q="cebolla caramelizada" data-w="Cebolla_caramelizada" data-e="Caramelized_onions"><b>Cebolla caramelizada</b>: cocinada lento hasta quedar dulce.</li>
+    <li data-q="tomate seco" data-w="Tomate_seco" data-e="Sun-dried_tomato"><b>Tomate seco</b>: tomate deshidratado, concentrado y dulce.</li>
+    <li data-q="aceite de trufa" data-w="Aceite_de_trufa" data-e="Truffle_oil"><b>Aceite de trufa</b>: aceite con aroma a trufa, un hongo de lujo. Es el aroma de la Funghi Tartufo.</li>
+    <li data-q="salsa pesto" data-w="Pesto" data-e="Pesto"><b>Pesto</b>: albahaca, nuez, parmesano y aceite. El clásico lleva piñones; Romaria usa nuez.</li>
+  </ul>
+  <h3>Salsas de pasta</h3>
+  <ul class="gl">
+    <li data-q="pasta pomodoro basilico" data-w="Salsa_de_tomate" data-e="Tomato_sauce"><b>Pomodoro basilico</b>: tomate con albahaca.</li>
+    <li data-q="salsa bolognesa" data-w="Salsa_boloñesa" data-e="Bolognese_sauce"><b>Bolognesa</b>: ragú de carne cocinado lento con tomate.</li>
+    <li data-q="fettuccine alfredo" data-w="Fettuccine_Alfredo" data-e="Fettuccine_Alfredo"><b>Alfredo</b>: crema con jamón y cebolla, a la chilena.</li>
+    <li data-q="salsa rosa pasta" data-w="Salsa_rosa_(pasta)" data-e="Vodka_sauce"><b>Salsa rosa</b>: tomate con crema.</li>
+    <li data-q="pasta puttanesca" data-w="Puttanesca" data-e="Puttanesca"><b>Puttanesca</b>: tomate, aceitunas, alcaparras, ajo y a veces anchoas. Intensa y salada.</li>
+    <li data-q="pasta amatriciana" data-w="Amatriciana" data-e="Amatriciana"><b>Amatriciana</b>: tomate con tocino y cebolla. La original es con guanciale y pecorino.</li>
+    <li data-q="aji amarillo peruano" data-w="Ají_amarillo" data-e="Aji_amarillo"><b>Ají amarillo</b>: ají peruano, frutal y de picor medio. Va con camarones y champiñones flambeados con pisco: se prende el pisco para evaporar el alcohol y dejar el aroma.</li>
+    <li data-q="tagliatelle al nero tinta de calamar" data-w="Tinta_de_calamar" data-e="Squid_ink_pasta"><b>Al nero</b>: pasta teñida con tinta de calamar. Negra, con sabor a mar.</li>
+  </ul>
+  <h3>Pastas</h3>
+  <ul class="gl">
+    <li data-q="fettuccine" data-w="Fettuccine" data-e="Fettuccine"><b>Fettuccine y tagliatelle</b>: cintas planas; el tagliatelle es un poco más angosto.</li>
+    <li data-q="gnocchi de papa" data-w="Ñoquis" data-e="Gnocchi"><b>Gnocchi</b>: ñoquis de papa.</li>
+    <li data-q="ravioli espinaca ricotta" data-w="Ravioli" data-e="Ravioli"><b>Ravioli</b>: pasta rellena, aquí de espinaca y ricotta.</li>
+    <li data-q="tortellini" data-w="Tortellini" data-e="Tortellini"><b>Tortellini</b>: anillos rellenos, aquí de mechada.</li>
+    <li data-q="sorrentinos" data-w="Sorrentinos" data-e="Sorrentinos"><b>Sorrentinos</b>: rellenos grandes y redondos, de origen argentino.</li>
+  </ul>
+  <h3>Barra</h3>
+  <ul class="gl">
+    <li data-q="aperol spritz" data-w="Aperol" data-e="Aperol"><b>Aperol</b>: aperitivo italiano naranja, amargo y suave. Base del Aperol Spritz.</li>
+    <li data-q="campari negroni" data-w="Campari" data-e="Campari"><b>Campari</b>: rojo y más amargo que el Aperol. Va en el Negroni y en el Sour Romaría.</li>
+    <li data-q="vermouth rosso" data-w="Vermut" data-e="Vermouth"><b>Vermut rosso</b>: vino fortificado dulce con hierbas.</li>
+    <li data-q="st germain licor" data-w="St-Germain_(licor)" data-e="St-Germain_(liqueur)"><b>Saint Germain</b>: licor de flor de saúco, floral y dulce.</li>
+    <li data-q="spritz coctel" data-w="Spritz" data-e="Spritz_(cocktail)"><b>Spritz</b>: aperitivo con espumante y soda.</li>
+    <li data-q="ramazzotti amaro" data-w="Ramazzotti" data-e="Amaro_Ramazzotti"><b>Ramazzotti</b>: amaro italiano, licor de hierbas.</li>
+    <li data-q="limoncello" data-w="Limoncello" data-e="Limoncello"><b>Limoncello</b>: licor de limón, bajativo italiano.</li>
+    <li data-q="grappa" data-w="Grappa" data-e="Grappa"><b>Grappa</b>: destilado del orujo de uva, fuerte.</li>
+    <li data-q="fernet branca" data-w="Fernet-Branca" data-e="Fernet-Branca"><b>Fernet Branca</b>: amargo de hierbas, bajativo.</li>
+    <li data-q="mezcal" data-w="Mezcal" data-e="Mezcal"><b>Mezcal</b>: destilado de agave, ahumado.</li>
+    <li data-q="tequila reposado" data-w="Tequila" data-e="Tequila"><b>Tequila reposado o añejo</b>: con paso por barrica, más suave.</li>
+    <li data-q="carajillo" data-w="Carajillo" data-e="Carajillo"><b>Carajillo</b>: café con licor.</li>
+    <li data-q="mocktail" data-w="Cóctel_sin_alcohol" data-e="Mocktail"><b>Mocktail</b>: cóctel sin alcohol.</li>
+  </ul>
+  <h3>Vinos</h3>
+  <ul class="gl">
+    <li data-q="pinot noir vino" data-w="Pinot_noir" data-e="Pinot_noir"><b>Pinot Noir</b>: tinto liviano y frutal. No aplasta la comida; ideal para prosciutto y pizzas suaves.</li>
+    <li data-q="carmenere vino chileno" data-w="Carménère" data-e="Carménère"><b>Carmenere</b>: tinto chileno, especiado y suave. Va con la mechada.</li>
+    <li data-q="malbec vino" data-w="Malbec" data-e="Malbec"><b>Malbec</b>: tinto argentino, frutal y con cuerpo.</li>
+    <li data-q="vino pais maule" data-w="País_(uva)" data-e="Listán_Prieto"><b>Carignan y País</b>: cepas antiguas del Maule, con historia. Buen dato para contar en la mesa.</li>
+    <li data-q="sauvignon blanc leyda" data-w="Sauvignon_blanc" data-e="Sauvignon_blanc"><b>Sauvignon Blanc</b>: blanco fresco y ácido. Con bufala, burrata y salmón.</li>
+    <li data-q="chardonnay vino" data-w="Chardonnay" data-e="Chardonnay"><b>Chardonnay</b>: blanco más redondo. Con pastas de crema y camarones.</li>
+    <li data-q="espumante brut" data-w="Vino_espumoso" data-e="Sparkling_wine"><b>Brut, Extra Brut y Rosé</b>: espumantes. Brut y Extra Brut, de menos a más seco; el Rosé es rosado.</li>
+  </ul>
+  <h3>Postres</h3>
+  <ul class="gl">
+    <li data-q="tiramisu" data-w="Tiramisú" data-e="Tiramisu"><b>Tiramisú</b>: bizcocho mojado en café con crema de mascarpone y cacao.</li>
+    <li data-q="panna cotta frambuesa" data-w="Panna_cotta" data-e="Panna_cotta"><b>Panacota</b>: crema cocida y cuajada, con salsa de frambuesa o maracuyá.</li>
+    <li data-q="suspiro limeño" data-w="Suspiro_limeño" data-e="Suspiro_de_limeña"><b>Suspiro</b>: postre de manjar con merengue. El de Romaria lleva maracuyá.</li>
+  </ul>
+</div></section>
+
+<section class="band" id="venta"><div class="wrap">
+  <h2>Venta sugestiva y maridajes</h2>
+  <ul>
+    <li><span class="k">Margarita Romaria o burrata</span>: Sauvignon Blanc Amaral de Leyda, o espumante por copa.</li>
+    <li><span class="k">Don Alfredo o tabla de prosciutto</span>: Pinot Noir Casa Marín.</li>
+    <li><span class="k">Pepe Cipolla o Mechada</span>: Carmenere Chamán o Malbec Séptima.</li>
+    <li><span class="k">Pastas al ají amarillo</span>: Sour Romaría o Chilcano, que conversan con el pisco del flambeado.</li>
+    <li><span class="k">Grupos en la terraza</span>: jarra de La Gringa o de Espojito para abrir la mesa.</li>
+    <li><span class="k">Cierre</span>: tiramisú con espresso, o un limoncello o grappa de bajativo.</li>
+  </ul>
+  <div class="say">«Para empezar, ¿les traigo una burrata al horno para compartir mientras eligen? Y con la Margarita Romaria les recomiendo el Sauvignon Blanc de Leyda; es fresco y le va perfecto a la bufala».</div>
+  <div class="tip">Idea clave para un capitán: subir el ticket con entradas para compartir, jarras y agregados del grupo D, sin que el cliente sienta que le están vendiendo. Y medirlo por garzón.</div>
+</div></section>
+
+<section class="band" id="capitan"><div class="wrap">
+  <h2>Qué hace un capitán aquí</h2>
+  <ul>
+    <li><span class="k">Antes del servicio</span>: revisar montaje, reservas y quiebres de stock; briefing de 5 minutos con sugerencias del día y rangos de mesas.</li>
+    <li><span class="k">En el peak</span>: leer la sala, mover gente entre rangos, coordinar tiempos entre cocina, barra y terraza, y apagar incendios antes de que lleguen a la mesa.</li>
+    <li><span class="k">Clientes</span>: pasar por las mesas, resolver reclamos en el momento, cuidar a los clientes frecuentes del barrio.</li>
+    <li><span class="k">Equipo</span>: inducir a los nuevos, corregir en privado, reconocer en público.</li>
+    <li><span class="k">Cierre</span>: cuadrar, dejar listo el turno siguiente y avisar novedades.</li>
+  </ul>
+  <h3>Tu experiencia, en tres frases</h3>
+  <ul>
+    <li>Más de 20 años en sala. En Bravo Cabrera, Puerto Varas, pasé de garzón a jefe de sala en 2010 y a administrador en 2012.</li>
+    <li>Tres años como Garzón Senior en el Holiday Inn del aeropuerto, con estándar IHG, alto flujo, eventos y clientes de todo el mundo.</li>
+    <li>En François rediseñé carta y precios, armé estándares de servicio con un manual digital y entrevisté y capacité al equipo de sala.</li>
+  </ul>
+</div></section>
+
+<section class="band" id="preguntas"><div class="wrap">
+  <h2>Preguntas probables</h2>
+  <p class="note">Toca cada pregunta para ver una respuesta modelo. Dila con tus palabras; no de memoria.</p>
+  <details><summary>Cuéntame de ti.</summary><p>Llevo más de 20 años en sala. Partí de garzón en Santiago, en Puerto Varas llegué a jefe de sala y administrador, después estuve tres años en el Holiday Inn con estándar internacional, y este año lideré la revitalización de François en La Florida. Lo mío es la sala: el cliente, el equipo y el ritmo del servicio. Me gusta mucho un local como Romaria, con movimiento, terraza y buena barra.</p></details>
+  <details><summary>¿Por qué quieres dejar tu trabajo actual?</summary><p>En François me tocó un proyecto de revitalización: carta, precios, estándares y equipo. Esa etapa ya la cumplí, y quiero volver a un salón de alto movimiento, con un equipo más grande y una barra fuerte, que es donde más aporto.</p><p class="note">No hables mal de nadie ni menciones contrato ni cotizaciones.</p></details>
+  <details><summary>¿Por qué capitán, si fuiste administrador?</summary><p>Porque lo que más disfruto es estar en la sala, con el cliente y el equipo, no en una oficina. Como capitán uso mi experiencia de administración para ordenar el servicio, pero sigo en la cancha.</p></details>
+  <details><summary>¿Cómo manejas a un cliente molesto?</summary><p>Primero lo escucho completo sin interrumpir, me disculpo por la experiencia y le doy una solución concreta en el momento: rehacer el plato, priorizarlo o cortesía si corresponde. Después reviso con el equipo qué falló, en privado, para que no se repita.</p></details>
+  <details><summary>¿Cómo subes la venta de una mesa?</summary><p>Con recomendación, no con presión: proponer una entrada para compartir mientras eligen, sugerir el vino o el cóctel que va con el plato, ofrecer jarras a los grupos y cerrar con postre y café. En el Holiday Inn subí el ticket promedio recomendando vinos y destilados, y en François medía los extras por garzón.</p></details>
+  <details><summary>¿Cómo motivas y ordenas a un equipo?</summary><p>Con un briefing corto antes de cada servicio, rangos claros y metas simples. Corrijo en privado y reconozco en público. A los nuevos los acompaño los primeros turnos; en François armé un manual digital de sala para eso.</p></details>
+  <details><summary>¿Qué haces si un garzón no llega o llega tarde en pleno peak?</summary><p>Primero el servicio: redistribuyo rangos y me tomo mesas yo mismo si hace falta. Después hablo con la persona en privado para saber qué pasó y dejar claro el compromiso. Si se repite, lo informo.</p></details>
+  <details><summary>¿Qué disponibilidad tienes?</summary><p>Turnos rotativos, fines de semana y festivos, incluido el cierre. Puedo partir la primera semana de diciembre.</p><p class="note">Ajusta la fecha según cómo cierres en François.</p></details>
+  <details><summary>¿Cuánto pretendes ganar?</summary><p>Me gustaría conocer primero cómo funciona aquí: sueldo base, propinas y horario. ¿Qué rango manejan para el cargo?</p><p class="note">Si insisten, da un piso: lo que ganas hoy o más, de sueldo base líquido, más propinas.</p></details>
+  <details><summary>¿Cuál es tu mayor debilidad?</summary><p>Soy exigente con los detalles del servicio y a veces quiero resolver todo yo. He aprendido a delegar y a confiar en el equipo, porque un capitán que hace todo solo no forma a nadie.</p></details>
+  <details><summary>¿Conoces Romaria?</summary><p>Sí, revisé la carta y la barra. Me llamó la atención la coctelería de autor como La Gringa y el Sour Romaría, las jarras para la terraza y pizzas como la Margarita Romaria con bufala o la Don Alfredo. Hay mucho espacio para venta sugestiva.</p></details>
+</div></section>
+
+<section class="band" id="casos"><div class="wrap">
+  <h2>Casos de servicio</h2>
+  <details><summary>Una pizza llegó fría y el cliente reclama.</summary><p>Me disculpo, retiro la pizza y pido una nueva con prioridad a cocina. Mientras tanto le ofrezco algo para la espera. Después reviso si el problema fue el pase, el garzón o la cocina.</p></details>
+  <details><summary>Terraza llena, faltan dos garzones, la cocina va atrasada.</summary><p>Reasigno rangos, me tomo mesas, aviso a los clientes del tiempo de espera antes de que pregunten, empujo bebidas y entradas rápidas para que la espera se sienta menos, y coordino con cocina el orden de salida.</p></details>
+  <details><summary>Te piden un vino para la Don Alfredo.</summary><p>Le recomiendo el Pinot Noir Casa Marín: es liviano y va muy bien con el prosciutto y el grana. Si prefieren blanco, un Chardonnay de Leyda.</p></details>
+  <details><summary>Mesa de ocho quiere pagar por separado al final.</summary><p>Lo ideal es preguntarlo al tomar el pedido y ordenar la comanda por persona. Si no se hizo, divido con calma en el POS y aviso a la mesa que tomará unos minutos.</p></details>
+  <details><summary>Un cliente con alergia o vegano.</summary><p>Confirmo con cocina antes de prometer nada. La carta marca platos veganos y hay pizzas con opción vegana: Norma, Del Huerto, Piero y Funghi Tartufo.</p></details>
+</div></section>
+
+<section class="band" id="tuyas"><div class="wrap">
+  <h2>Preguntas para hacerles</h2>
+  <ul>
+    <li>¿Cómo funcionan las propinas: individual o en pozo? ¿Quiénes entran y cada cuánto se pagan?</li>
+    <li>¿Cuál es el sueldo base, el tipo de contrato y el período de prueba?</li>
+    <li>¿Qué turnos haría el capitán y a qué hora se sale realmente después del cierre?</li>
+    <li>¿Cuántos garzones tendría a cargo y cuántas mesas hay entre salón y terraza?</li>
+    <li>¿Qué sistema de caja usan?</li>
+    <li>¿Hay estacionamiento o ayuda de movilización para el cierre?</li>
+    <li>¿Cómo es la capacitación de carta y barra al entrar?</li>
+  </ul>
+</div></section>
+
+<section class="band" id="dia"><div class="wrap">
+  <h2>El día de la entrevista</h2>
+  <div class="check">
+    <label><input type="checkbox">Contestar el correo a Isidora confirmando la entrevista.</label>
+    <label><input type="checkbox">CV impreso, la versión corregida con el correo nuevo.</label>
+    <label><input type="checkbox">Ropa: camisa lisa negra o blanca, pantalón oscuro, zapatos lustrados.</label>
+    <label><input type="checkbox">Teléfono con sonido y el filtro de spam apagado.</label>
+    <label><input type="checkbox">Salir a las 16:45 en auto sin TAG, o 16:30 en metro: Línea 5 hasta Baquedano, Línea 1 hasta Tobalaba, y micro por Avenida Vitacura.</label>
+    <label><input type="checkbox">Llegar a las 17:45 y preguntar por Felipe Jiménez.</label>
+    <label><input type="checkbox">Vuelta: la micro 405 corre las 24 horas por Avenida Vitacura y te deja en Pajaritos, en el paradero 10 o en Las Parcelas.</label>
+  </div>
+  <div class="tip">Al llegar, mira la sala con ojos de capitán: cuántas mesas, cómo está la terraza, cómo atienden. Te sirve para comentar algo concreto en la entrevista.</div>
+</div></section>
+</main>
+
+<div class="player" role="region" aria-label="Reproductor">
+  <span class="now" id="now">Toca Escuchar en cualquier sección</span>
+  <button class="btn" id="pp" disabled>Pausa</button>
+  <button class="btn" id="stop" disabled>Detener</button>
+  <select id="rate" aria-label="Velocidad"><option value="0.85">Lento</option><option value="1" selected>Normal</option><option value="1.2">Rápido</option></select>
+</div>
+
+<script>
+{
+const synth = window.speechSynthesis;
+const secs = [...document.querySelectorAll('main section')];
+const nowEl = document.getElementById('now'), pp = document.getElementById('pp'), stopB = document.getElementById('stop'), rateSel = document.getElementById('rate');
+document.querySelectorAll('.gl li[data-q]').forEach(li => { const a = document.createElement('a'); a.className = 'foto'; a.textContent = 'Ver fotos'; a.target = '_blank'; a.rel = 'noopener'; a.href = 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(li.dataset.q); li.append(' ', a); });
+
+const wiki = async (lang, t) => { try { const r = await fetch('https://' + lang + '.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(t)); if (!r.ok) return null; const j = await r.json(); return (j.thumbnail && j.thumbnail.source) || null; } catch (e) { return null; } };
+const photo = async el => { let u = await wiki('es', el.dataset.w); if (!u && el.dataset.e) u = await wiki('en', el.dataset.e); if (!u) return; const img = document.createElement('img'); img.src = u; img.alt = ''; img.loading = 'lazy'; if (el.tagName === 'FIGURE') el.prepend(img); else { img.className = 'ph'; el.prepend(img); } };
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); photo(e.target); } }), {rootMargin: '400px'});
+document.querySelectorAll('[data-w]').forEach(el => io.observe(el));
+const icon = '<svg viewBox="0 0 16 16"><path d="M4 2v12l10-6z"/></svg>';
+secs.forEach((s, i) => {
+  const b = document.createElement('button');
+  b.className = 'btn listen'; b.innerHTML = icon + 'Escuchar esta sección';
+  b.addEventListener('click', () => play(i, false));
+  s.querySelector('h2').after(b);
+});
+let voice = null;
+const pickVoice = () => {
+  const v = synth ? synth.getVoices() : [];
+  const pref = ['es-CL', 'es-419', 'es-US', 'es-MX', 'es-AR', 'es-ES', 'es'];
+  for (const p of pref) { const f = v.find(x => x.lang && x.lang.replace('_', '-').toLowerCase().startsWith(p.toLowerCase())); if (f) { voice = f; return; } }
+};
+if (synth) { pickVoice(); synth.onvoiceschanged = pickVoice; }
+const textOf = el => {
+  const c = el.cloneNode(true);
+  c.querySelectorAll('button, .note, .foto').forEach(n => n.remove());
+  c.querySelectorAll('summary').forEach(n => n.append('. '));
+  c.querySelectorAll('li, p, h2, h3, label, .say, .tip, dt, dd').forEach(n => n.append('. '));
+  return c.textContent.replace(/\s+/g, ' ').replace(/(\.\s*){2,}/g, '. ').trim();
+};
+const chunk = t => {
+  const out = [];
+  t.split(/(?<=[.!?:;])\s+/).forEach(s => {
+    while (s.length > 180) { let k = s.lastIndexOf(',', 180); if (k < 60) k = s.lastIndexOf(' ', 180); out.push(s.slice(0, k + 1)); s = s.slice(k + 1).trim(); }
+    if (s.trim()) out.push(s);
+  });
+  return out;
+};
+let queue = [], idx = 0, cur = -1, chain = false, paused = false, run = 0;
+const mark = i => { secs.forEach(s => s.classList.remove('speaking')); if (i >= 0) secs[i].classList.add('speaking'); };
+function play(i, all) {
+  if (!synth) { nowEl.textContent = 'Tu navegador no permite leer en voz alta.'; return; }
+  synth.cancel(); run++; paused = false; chain = all; cur = i;
+  const intro = (i === 0 && all) ? textOf(document.querySelector('.ticket')) + '. ' : '';
+  queue = chunk(intro + textOf(secs[i])); idx = 0;
+  nowEl.textContent = 'Escuchando: ' + secs[i].querySelector('h2').textContent;
+  pp.disabled = stopB.disabled = false; pp.textContent = 'Pausa'; pp.classList.add('on');
+  mark(i); secs[i].scrollIntoView({block: 'start'});
+  next(run);
+}
+function next(r) {
+  if (r !== run) return;
+  if (idx >= queue.length) {
+    if (chain && cur + 1 < secs.length) { play(cur + 1, true); return; }
+    stop(); return;
+  }
+  const u = new SpeechSynthesisUtterance(queue[idx++]);
+  u.lang = voice ? voice.lang : 'es-CL'; if (voice) u.voice = voice;
+  u.rate = parseFloat(rateSel.value);
+  u.onend = () => next(r); u.onerror = () => next(r);
+  synth.speak(u);
+}
+function stop() {
+  run++; if (synth) synth.cancel(); paused = false; mark(-1);
+  nowEl.textContent = 'Toca Escuchar en cualquier sección';
+  pp.disabled = stopB.disabled = true; pp.textContent = 'Pausa'; pp.classList.remove('on');
+}
+pp.addEventListener('click', () => {
+  if (!synth) return;
+  if (paused) { synth.resume(); paused = false; pp.textContent = 'Pausa'; pp.classList.add('on'); }
+  else { synth.pause(); paused = true; pp.textContent = 'Seguir'; pp.classList.remove('on'); }
+});
+stopB.addEventListener('click', stop);
+document.getElementById('all').addEventListener('click', () => play(0, true));
+rateSel.addEventListener('change', () => { if (cur >= 0 && !pp.disabled) { const keep = Math.max(0, idx - 1); const r = ++run; synth.cancel(); idx = keep; setTimeout(() => next(r), 50); } });
+try { const k = 'romaria-check'; const saved = JSON.parse(localStorage.getItem(k) || '[]');
+  document.querySelectorAll('.check input').forEach((c, i) => { c.checked = !!saved[i]; c.addEventListener('change', () => { try { localStorage.setItem(k, JSON.stringify([...document.querySelectorAll('.check input')].map(x => x.checked))); } catch (e) {} }); });
+} catch (e) {}
+}
+</script>
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</body>
+</html>
