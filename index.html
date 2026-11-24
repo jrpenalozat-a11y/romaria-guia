@@ -236,6 +236,23 @@ details p{margin:8px 0 14px}
 .timer.low .tt{color:var(--terra)}.timer.low .fg{stroke:var(--terra)}
 .rateq{margin:22px 0 8px}
 
+/* Plegar capítulos y secciones */
+.chap h2{position:relative;padding-right:44px;cursor:pointer;border-radius:8px}
+.chap h2::after{content:"";position:absolute;right:10px;top:.42em;width:11px;height:11px;border-right:2.5px solid var(--olive);border-bottom:2.5px solid var(--olive);transform:rotate(-135deg);transition:transform .2s}
+.chap.shut h2::after{transform:rotate(45deg);top:.22em}
+.chap.shut{padding-top:26px!important;padding-bottom:26px}
+.chap.shut h2{margin-bottom:0}
+.chap.shut .wrap>:not(.eyebrow):not(h2){display:none!important}
+.chap.is-done .wrap>.eyebrow:first-child::after{content:" · Estudiado"}
+.chap h3{cursor:pointer;border-radius:6px;min-height:32px}
+.chap h3::after{order:1}
+.chap h3 .chev{order:2;width:9px;height:9px;margin:0 6px 0 2px;border-right:2px solid var(--olive);border-bottom:2px solid var(--olive);transform:rotate(-135deg) translate(-2px,-2px);transition:transform .2s}
+.chap h3.closed .chev{transform:rotate(45deg) translate(-2px,-2px)}
+.chap h2:focus-visible,.chap h3:focus-visible{outline:3px solid var(--olive);outline-offset:4px}
+.folded{display:none!important}
+#glosario.searching .folded:not([hidden]){display:block!important}
+.foldall{margin-top:14px;min-height:42px;font-size:14px}
+
 /* Explicación al pararse sobre un ingrediente */
 .gterm{text-decoration:underline dotted color-mix(in srgb,var(--olive) 75%,transparent);text-decoration-thickness:1.5px;text-underline-offset:4px;cursor:help;border-radius:4px}
 .gterm:hover,.gterm.on{background:color-mix(in srgb,var(--olive) 18%,transparent)}
@@ -333,6 +350,8 @@ details p{margin:8px 0 14px}
   <p class="eyebrow">Índice</p>
   <h2>Diez capítulos, en orden</h2>
   <nav class="chapters" id="chapters" aria-label="Capítulos"></nav>
+  <button class="btn btn-line foldall" id="foldall"></button>
+  <p class="note" style="margin:10px 0 0">Toca el título de un capítulo o de una sección para plegarlo; tócalo de nuevo para abrirlo.</p>
 </div></div>
 
 <section class="chap" id="romaria" data-min="2"><div class="wrap">
@@ -741,7 +760,8 @@ function showView(name, top) {
   store.set('romaria-tab', name);
   if (top) window.scrollTo({top: 0});
 }
-const viewOf = el => el.closest('.view').dataset.view;
+/* Se usa al navegar hacia un capítulo: si estaba plegado, lo abre. */
+const viewOf = el => { if (el.classList.contains('shut')) fold(el, false); return el.closest('.view').dataset.view; };
 $$('.tabs button').forEach(b => b.addEventListener('click', () => showView(b.dataset.go, true)));
 $$('[data-go-view]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); showView(b.dataset.goView, true); }));
 showView(store.get('romaria-tab', 'estudiar'), false);
@@ -759,7 +779,11 @@ secs.forEach((s, i) => {
   chapNav.append(a);
   const row = document.createElement('div'); row.className = 'done-row';
   const b = document.createElement('button'); b.className = 'btn done'; b.dataset.id = s.id;
-  b.addEventListener('click', () => { done.has(s.id) ? done.delete(s.id) : done.add(s.id); store.set('romaria-done', [...done]); renderProgress(); });
+  b.addEventListener('click', () => {
+    const was = done.has(s.id);
+    was ? done.delete(s.id) : done.add(s.id); store.set('romaria-done', [...done]); renderProgress();
+    if (!was) { fold(s, true); s.scrollIntoView({block: 'start'}); }
+  });
   row.append(b);
   const nx = secs[i + 1];
   const n = document.createElement('a'); n.className = 'next';
@@ -775,6 +799,7 @@ function renderProgress() {
   $('#metertx').textContent = n + ' de ' + tot + ' capítulos';
   $('#meterbar').style.width = (100 * n / tot) + '%';
   $$('#chapters a').forEach(a => a.classList.toggle('is-done', done.has(a.dataset.id)));
+  secs.forEach(s => s.classList.toggle('is-done', done.has(s.id)));
   $$('.done').forEach(b => { const d = done.has(b.dataset.id); b.setAttribute('aria-pressed', d); b.innerHTML = d ? icon('i-check') + 'Estudiado' : 'Marcar como estudiado'; });
   const pend = secs.find(s => !done.has(s.id)), rs = $('#resume');
   rs.hidden = !(n > 0 && pend);
@@ -784,6 +809,32 @@ function renderProgress() {
   }
 }
 renderProgress();
+
+/* ---------- plegar capítulos y secciones ----------
+   Un toque en el título de un capítulo lo pliega o lo abre; lo mismo con los subtítulos de adentro.
+   Al marcar un capítulo como estudiado se pliega solo. Todo queda guardado en el teléfono. */
+const shut = new Set(store.get('romaria-shut', []));
+const syncFold = () => { $('#foldall').textContent = secs.every(s => s.classList.contains('shut')) ? 'Abrir todos los capítulos' : 'Plegar todos los capítulos'; };
+function fold(s, on) {
+  s.classList.toggle('shut', on); s.querySelector('h2').setAttribute('aria-expanded', !on);
+  on ? shut.add(s.id) : shut.delete(s.id); store.set('romaria-shut', [...shut]); syncFold();
+}
+const onTap = (el, fn) => { el.tabIndex = 0; el.addEventListener('click', fn); el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); } }); };
+secs.forEach(s => {
+  const on = shut.has(s.id); s.classList.toggle('shut', on); s.querySelector('h2').setAttribute('aria-expanded', !on);
+  onTap(s.querySelector('h2'), () => fold(s, !s.classList.contains('shut')));
+});
+syncFold();
+$('#foldall').addEventListener('click', () => { const on = !secs.every(s => s.classList.contains('shut')); secs.forEach(s => fold(s, on)); });
+const subShut = new Set(store.get('romaria-sub', []));
+$$('.chap h3').forEach(h3 => {
+  const key = h3.closest('.chap').id + ':' + h3.textContent.trim(), body = [];
+  for (let n = h3.nextElementSibling; n && n.tagName !== 'H3' && !n.classList.contains('done-row'); n = n.nextElementSibling) body.push(n);
+  const chev = document.createElement('span'); chev.className = 'chev'; h3.append(chev);
+  const set = on => { h3.classList.toggle('closed', on); h3.setAttribute('aria-expanded', !on); body.forEach(n => n.classList.toggle('folded', on)); };
+  set(subShut.has(key));
+  onTap(h3, () => { const on = !h3.classList.contains('closed'); set(on); on ? subShut.add(key) : subShut.delete(key); store.set('romaria-sub', [...subShut]); });
+});
 
 /* ---------- cuenta regresiva ---------- */
 const CITA = new Date('2026-11-24T18:00:00-03:00');
@@ -1265,6 +1316,7 @@ $('#goxp').addEventListener('click', () => { showView('hoy'); $('#xp').scrollInt
 const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 $('#gq').addEventListener('input', e => {
   const q = norm(e.target.value.trim()); let any = false;
+  $('#glosario').classList.toggle('searching', !!q);
   $$('#glosario ul.gl').forEach(ul => {
     let n = 0;
     ul.querySelectorAll('li').forEach(li => { const m = !q || (' ' + norm(li.textContent.replace('Ver fotos', '')).replace(/[^a-z0-9]+/g, ' ')).includes(' ' + q); li.hidden = !m; if (m) n++; });

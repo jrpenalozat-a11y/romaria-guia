@@ -1,6 +1,6 @@
 /* La página se pide primero a la red para que los cambios lleguen al tiro; sin señal se usa la copia guardada.
    Lo demás (íconos, letras, fotos) sale de la copia guardada. */
-const C='romaria-v5';const F=['./','index.html','manifest.json','icon-192.png','icon-512.png'];
+const C='romaria-v6';const F=['./','index.html','manifest.json','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(F)));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))));self.clients.claim()});
 const guardar=(req,res)=>{const cp=res.clone();caches.open(C).then(c=>c.put(req,cp));return res};
