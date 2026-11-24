@@ -34,7 +34,7 @@
 *{box-sizing:border-box;min-width:0}
 html{scroll-padding-top:76px;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);overflow-x:clip;padding-bottom:calc(92px + env(safe-area-inset-bottom));-webkit-tap-highlight-color:transparent}
-body.playing{padding-bottom:calc(168px + env(safe-area-inset-bottom))}
+body.playing{padding-bottom:calc(190px + env(safe-area-inset-bottom))}
 h1,h2,h3{text-wrap:balance;margin:0}
 h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
 a{color:var(--olive-d)}
@@ -207,14 +207,46 @@ details p{margin:8px 0 14px}
 .check input{width:24px;height:24px;flex:none;accent-color:var(--olive);margin-top:1px}
 .check input:checked+span{color:var(--soft);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--olive) 60%,transparent)}
 
+/* Mejoras: seguir, buscador, repaso exprés, simulador */
+[hidden]{display:none!important}
+.resume{display:inline-flex;align-items:center;min-height:44px;margin-top:8px;color:#e3ebcc;font:italic 500 16px var(--serif);text-decoration:none}
+.gsearch{width:100%;min-height:46px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:16px var(--sans);padding:0 18px;margin:4px 0 2px}
+.gsearch:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
+.xp{padding:34px 20px 6px}
+.xp h2{font-size:clamp(28px,7vw,36px);margin:6px 0 6px}
+.xp .sub{color:var(--soft);margin:0 0 16px}
+.xp-list{display:grid;gap:10px;margin-top:18px}
+.xp-list a{display:grid;grid-template-columns:34px 1fr;gap:2px 10px;padding:14px 16px;border:1px solid var(--line);background:var(--paper);border-radius:16px;text-decoration:none;color:var(--ink)}
+.xp-list .n{grid-row:span 2;font:italic 400 22px/1.2 var(--serif);color:var(--olive)}
+.xp-list b{font-size:13px;letter-spacing:.04em;color:var(--olive-d)}
+.xp-list .x{font-size:15px;line-height:1.5}
+.recopt{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:14px;color:var(--soft);cursor:pointer;min-height:44px}
+.recopt input{width:22px;height:22px;accent-color:var(--olive);flex:none}
+.recst{min-height:1.5em;margin:10px 0 0;font-size:14px;color:var(--terra);font-weight:600}
+.recdot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--terra);margin-right:8px;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.25}}
+.mine{margin:16px 0;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:var(--paper)}
+.mine audio{display:block;width:100%;margin-top:10px}
+.keys{margin:16px 0}
+.keys label{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.keys input{width:22px;height:22px;flex:none;accent-color:var(--olive);margin-top:2px}
+.keys input:checked+span{font-weight:600;color:var(--olive-d)}
+.missed{text-align:left;margin:4px 0 18px;padding:0;list-style:none}
+.missed li{padding:10px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.timer.low .tt{color:var(--terra)}.timer.low .fg{stroke:var(--terra)}
+.rateq{margin:22px 0 8px}
+
 /* Reproductor y pestañas */
-.player{position:fixed;left:10px;right:10px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:29;background:#283019;color:#f6f2e6;border-radius:20px;padding:10px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;box-shadow:0 18px 40px -12px rgba(0,0,0,.5);max-width:720px;margin:0 auto}
+.player{position:fixed;left:10px;right:10px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:29;background:#283019;color:#f6f2e6;border-radius:20px;padding:10px 12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;box-shadow:0 18px 40px -12px rgba(0,0,0,.5);max-width:720px;margin:0 auto}
 .player[hidden]{display:none}
-.player .now{flex:1 1 160px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:4px}
+.pprog{flex:1 1 100%;height:3px;border-radius:9px;background:rgba(246,242,230,.16);overflow:hidden}.pprog i{display:block;height:100%;width:0;background:#c7d4ab;transition:width .3s}
+.player .now{flex:1 1 100%;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:4px}
 .player .now b{font-family:var(--serif);font-style:italic;font-weight:500}
-.player .btn{background:rgba(246,242,230,.12);color:#f6f2e6;min-height:42px;padding:0 14px}
+.player .btn{background:rgba(246,242,230,.12);color:#f6f2e6;min-height:42px;padding:0 12px}
+.player .pico{padding:0;width:42px}
+.player #pp{flex:1;min-width:70px}
 .player .btn.on{background:#6c7d51}
-.player select{min-height:42px;border-radius:999px;background:rgba(246,242,230,.12);color:#f6f2e6;border:0;padding:0 12px;font:16px var(--sans)}
+.player select{min-height:42px;border-radius:999px;background:rgba(246,242,230,.12);color:#f6f2e6;border:0;padding:0 8px;font:16px var(--sans)}
 .player select option{color:#222}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;gap:4px;background:color-mix(in srgb,var(--paper) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom))}
 .tabs button{flex:1;max-width:180px;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:58px;border:0;background:none;color:var(--soft);font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;border-radius:16px;cursor:pointer}
@@ -242,6 +274,10 @@ details p{margin:8px 0 14px}
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></g></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.3a10 10 0 0 0 6.2 6.2l1.3-2 4 1.5v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 4.5 5.5a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M6 5v14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M19 5.5v13L9 12z" fill="currentColor"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M18 5v14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M5 5.5v13L15 12z" fill="currentColor"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></g></symbol>
   <symbol id="i-ear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3.5" y="14" width="4" height="6.5" rx="1.5"/><rect x="16.5" y="14" width="4" height="6.5" rx="1.5"/></g></symbol>
 </svg>
 
@@ -278,8 +314,9 @@ details p{margin:8px 0 14px}
     <div class="btn-row">
       <button class="btn btn-cream" id="all"><svg><use href="#i-play"/></svg>Escuchar toda la guía</button>
       <button class="btn btn-ghost" data-go-view="practicar"><svg><use href="#i-cards"/></svg>Practicar</button>
+      <button class="btn btn-ghost" id="goxp"><svg><use href="#i-clock"/></svg>Repaso exprés</button>
     </div>
-    <div class="meter"><div class="lbl"><span>Tu avance</span><span id="metertx">0 de 10 capítulos</span></div><div class="bar"><i id="meterbar"></i></div></div>
+    <div class="meter"><div class="lbl"><span>Tu avance</span><span id="metertx">0 de 10 capítulos</span></div><div class="bar"><i id="meterbar"></i></div><a class="resume" id="resume" href="#" hidden></a></div>
   </div>
 </header>
 
@@ -379,6 +416,8 @@ details p{margin:8px 0 14px}
   <h2>Ingredientes y términos</h2>
   <div class="key"><p class="eyebrow">En 10 segundos</p><p>La bufala es más cremosa que la mozzarella. El prosciutto va después del horno. El pesto de Romaria lleva nuez. El ají amarillo se flambea con pisco.</p></div>
   <p class="note">Fotos de referencia desde Wikipedia (no son de Romaria). Toca «Ver fotos» para ver más en Google.</p>
+  <input type="search" id="gq" class="gsearch" placeholder="Buscar: burrata, amaro, pinot…" aria-label="Buscar en el glosario" autocomplete="off">
+  <p class="note" id="gnone" hidden>Nada con ese nombre. Prueba con otra palabra.</p>
   <h3>Quesos</h3>
   <ul class="gl">
     <li data-q="mozzarella fresca" data-w="Mozzarella" data-e="Mozzarella"><b>Mozzarella</b>: queso fresco de vaca que se derrite y estira. La base de casi todas las pizzas.</li>
@@ -515,33 +554,41 @@ details p{margin:8px 0 14px}
   </ul>
 </div></section>
 
-<section class="chap" id="preguntas" data-min="5"><div class="wrap">
+<section class="chap" id="preguntas" data-min="7"><div class="wrap">
   <p class="eyebrow">Capítulo 07</p>
   <h2>Preguntas probables</h2>
   <div class="key"><p class="eyebrow">En 10 segundos</p><p>Respuestas cortas, con un ejemplo real tuyo. Nunca hables mal de nadie. Ensáyalas en voz alta en el simulador de Practicar.</p></div>
   <p class="note">Toca cada pregunta para ver una respuesta modelo. Dila con tus palabras; no de memoria.</p>
-  <details><summary>Cuéntame de ti.</summary><p>Llevo más de 20 años en sala. Partí de garzón en Santiago, en Puerto Varas llegué a jefe de sala y administrador, después estuve tres años en el Holiday Inn con estándar internacional, y este año lideré la revitalización de François en La Florida. Lo mío es la sala: el cliente, el equipo y el ritmo del servicio. Me gusta mucho un local como Romaria, con movimiento, terraza y buena barra.</p></details>
-  <details><summary>¿Por qué quieres dejar tu trabajo actual?</summary><p>En François me tocó un proyecto de revitalización: carta, precios, estándares y equipo. Esa etapa ya la cumplí, y quiero volver a un salón de alto movimiento, con un equipo más grande y una barra fuerte, que es donde más aporto.</p><p class="note">No hables mal de nadie ni menciones contrato ni cotizaciones.</p></details>
-  <details><summary>¿Por qué capitán, si fuiste administrador?</summary><p>Porque lo que más disfruto es estar en la sala, con el cliente y el equipo, no en una oficina. Como capitán uso mi experiencia de administración para ordenar el servicio, pero sigo en la cancha.</p></details>
-  <details><summary>¿Cómo manejas a un cliente molesto?</summary><p>Primero lo escucho completo sin interrumpir, me disculpo por la experiencia y le doy una solución concreta en el momento: rehacer el plato, priorizarlo o cortesía si corresponde. Después reviso con el equipo qué falló, en privado, para que no se repita.</p></details>
-  <details><summary>¿Cómo subes la venta de una mesa?</summary><p>Con recomendación, no con presión: proponer una entrada para compartir mientras eligen, sugerir el vino o el cóctel que va con el plato, ofrecer jarras a los grupos y cerrar con postre y café. En el Holiday Inn subí el ticket promedio recomendando vinos y destilados, y en François medía los extras por garzón.</p></details>
-  <details><summary>¿Cómo motivas y ordenas a un equipo?</summary><p>Con un briefing corto antes de cada servicio, rangos claros y metas simples. Corrijo en privado y reconozco en público. A los nuevos los acompaño los primeros turnos; en François armé un manual digital de sala para eso.</p></details>
-  <details><summary>¿Qué haces si un garzón no llega o llega tarde en pleno peak?</summary><p>Primero el servicio: redistribuyo rangos y me tomo mesas yo mismo si hace falta. Después hablo con la persona en privado para saber qué pasó y dejar claro el compromiso. Si se repite, lo informo.</p></details>
-  <details><summary>¿Qué disponibilidad tienes?</summary><p>Turnos rotativos, fines de semana y festivos, incluido el cierre. Puedo partir la primera semana de diciembre.</p><p class="note">Ajusta la fecha según cómo cierres en François.</p></details>
-  <details><summary>¿Cuánto pretendes ganar?</summary><p>Me gustaría conocer primero cómo funciona aquí: sueldo base, propinas y horario. ¿Qué rango manejan para el cargo?</p><p class="note">Si insisten, da un piso: lo que ganas hoy o más, de sueldo base líquido, más propinas.</p></details>
-  <details><summary>¿Cuál es tu mayor debilidad?</summary><p>Soy exigente con los detalles del servicio y a veces quiero resolver todo yo. He aprendido a delegar y a confiar en el equipo, porque un capitán que hace todo solo no forma a nadie.</p></details>
-  <details><summary>¿Conoces Romaria?</summary><p>Sí, revisé la carta y la barra. Me llamó la atención la coctelería de autor como La Gringa y el Sour Romaría, las jarras para la terraza y pizzas como la Margarita Romaria con bufala o la Don Alfredo. Hay mucho espacio para venta sugestiva.</p></details>
+  <details data-k="Más de 20 años en sala|Jefe de sala y administrador en Puerto Varas|Holiday Inn y François|Por qué te gusta Romaria"><summary>Cuéntame de ti.</summary><p>Llevo más de 20 años en sala. Partí de garzón en Santiago, en Puerto Varas llegué a jefe de sala y administrador, después estuve tres años en el Holiday Inn con estándar internacional, y este año lideré la revitalización de François en La Florida. Lo mío es la sala: el cliente, el equipo y el ritmo del servicio. Me gusta mucho un local como Romaria, con movimiento, terraza y buena barra.</p></details>
+  <details data-k="La etapa en François ya está cumplida|Quiero un salón de alto movimiento|No hablé mal de nadie"><summary>¿Por qué quieres dejar tu trabajo actual?</summary><p>En François me tocó un proyecto de revitalización: carta, precios, estándares y equipo. Esa etapa ya la cumplí, y quiero volver a un salón de alto movimiento, con un equipo más grande y una barra fuerte, que es donde más aporto.</p><p class="note">No hables mal de nadie ni menciones contrato ni cotizaciones.</p></details>
+  <details data-k="Lo que disfruto es la sala, no la oficina|Uso lo de administrador para ordenar el servicio"><summary>¿Por qué capitán, si fuiste administrador?</summary><p>Porque lo que más disfruto es estar en la sala, con el cliente y el equipo, no en una oficina. Como capitán uso mi experiencia de administración para ordenar el servicio, pero sigo en la cancha.</p></details>
+  <details data-k="Escuchar completo, sin interrumpir|Disculparse|Solución concreta en el momento|Revisar después con el equipo, en privado"><summary>¿Cómo manejas a un cliente molesto?</summary><p>Primero lo escucho completo sin interrumpir, me disculpo por la experiencia y le doy una solución concreta en el momento: rehacer el plato, priorizarlo o cortesía si corresponde. Después reviso con el equipo qué falló, en privado, para que no se repita.</p></details>
+  <details data-k="Recomendar, no presionar|Entrada para compartir|El vino o cóctel que va con el plato|Jarras, postre y café|Un ejemplo tuyo: Holiday Inn o François"><summary>¿Cómo subes la venta de una mesa?</summary><p>Con recomendación, no con presión: proponer una entrada para compartir mientras eligen, sugerir el vino o el cóctel que va con el plato, ofrecer jarras a los grupos y cerrar con postre y café. En el Holiday Inn subí el ticket promedio recomendando vinos y destilados, y en François medía los extras por garzón.</p></details>
+  <details data-k="Briefing corto antes del servicio|Rangos claros y metas simples|Corregir en privado, reconocer en público|Acompañar a los nuevos"><summary>¿Cómo motivas y ordenas a un equipo?</summary><p>Con un briefing corto antes de cada servicio, rangos claros y metas simples. Corrijo en privado y reconozco en público. A los nuevos los acompaño los primeros turnos; en François armé un manual digital de sala para eso.</p></details>
+  <details data-k="Primero el servicio: redistribuir rangos|Tomar mesas yo mismo|Conversarlo después, en privado|Informar si se repite"><summary>¿Qué haces si un garzón no llega o llega tarde en pleno peak?</summary><p>Primero el servicio: redistribuyo rangos y me tomo mesas yo mismo si hace falta. Después hablo con la persona en privado para saber qué pasó y dejar claro el compromiso. Si se repite, lo informo.</p></details>
+  <details data-k="Rotativos, fines de semana y festivos|Incluye el cierre|Desde cuándo puedes partir"><summary>¿Qué disponibilidad tienes?</summary><p>Turnos rotativos, fines de semana y festivos, incluido el cierre. Puedo partir la primera semana de diciembre.</p><p class="note">Ajusta la fecha según cómo cierres en François.</p></details>
+  <details data-k="Preguntar primero por base, propinas y horario|Pedir el rango del cargo|Si insisten, dar un piso"><summary>¿Cuánto pretendes ganar?</summary><p>Me gustaría conocer primero cómo funciona aquí: sueldo base, propinas y horario. ¿Qué rango manejan para el cargo?</p><p class="note">Si insisten, da un piso: lo que ganas hoy o más, de sueldo base líquido, más propinas.</p></details>
+  <details data-k="Una debilidad real|Lo que aprendiste: delegar|Cerrar en positivo"><summary>¿Cuál es tu mayor debilidad?</summary><p>Soy exigente con los detalles del servicio y a veces quiero resolver todo yo. He aprendido a delegar y a confiar en el equipo, porque un capitán que hace todo solo no forma a nadie.</p></details>
+  <details data-k="Coctelería de autor: La Gringa, Sour Romaría|Jarras para la terraza|Una pizza con nombre: Margarita Romaria o Don Alfredo|Espacio para venta sugestiva"><summary>¿Conoces Romaria?</summary><p>Sí, revisé la carta y la barra. Me llamó la atención la coctelería de autor como La Gringa y el Sour Romaría, las jarras para la terraza y pizzas como la Margarita Romaria con bufala o la Don Alfredo. Hay mucho espacio para venta sugestiva.</p></details>
+  <details data-k="Fui garzón y también administré|Ordeno al equipo, cuido al cliente y vendo|Vengo a quedarme"><summary>¿Por qué deberíamos contratarte a ti?</summary><p>Porque conozco los dos lados: fui garzón y también administré. Sé lo que necesita el dueño y lo que vive el garzón en pleno peak. Ordeno al equipo, cuido al cliente y vendo sin presionar. Y vengo con ganas de quedarme.</p></details>
+  <details data-k="Primero observar y aprender|Carta, barra, sistema y equipo|Mejoras chicas, conversadas antes"><summary>¿Qué harías en tus primeras semanas aquí?</summary><p>Primero observo y aprendo: la carta, la barra, el sistema y cómo trabaja el equipo. Me aprendo los rangos y los nombres. Después propongo mejoras chicas y concretas, como un briefing corto antes del servicio, siempre conversadas con ustedes antes.</p><p class="note">No llegues a cambiar todo: eso asusta. Llega a sumar.</p></details>
+  <details data-k="Respeto y comunicación corta y clara|En el pase no se discute|Avisar con tiempo mesas grandes y quiebres"><summary>¿Cómo te llevas con la cocina y la barra?</summary><p>Con respeto y comunicación corta y clara. En el peak no se discute en el pase: se resuelve el plato y después se conversa. Aviso con tiempo las mesas grandes y los quiebres, y agradezco cuando salvan una mesa.</p></details>
+  <details data-k="El cliente no pide nada dos veces|Saludo rápido y bebida en los primeros minutos|Conocer el producto para recomendar|Una despedida que invite a volver"><summary>¿Qué es para ti un buen servicio?</summary><p>Que el cliente no tenga que pedir nada dos veces. Saludo rápido, carta y bebida en los primeros minutos, conocer el producto para recomendar, estar atento sin interrumpir y una despedida que invite a volver.</p></details>
 </div></section>
 
-<section class="chap" id="casos" data-min="3"><div class="wrap">
+<section class="chap" id="casos" data-min="5"><div class="wrap">
   <p class="eyebrow">Capítulo 08</p>
   <h2>Casos de servicio</h2>
   <div class="key"><p class="eyebrow">En 10 segundos</p><p>Siempre en el mismo orden: disculpa, solución en el momento y, después, revisar en privado qué falló.</p></div>
-  <details><summary>Una pizza llegó fría y el cliente reclama.</summary><p>Me disculpo, retiro la pizza y pido una nueva con prioridad a cocina. Mientras tanto le ofrezco algo para la espera. Después reviso si el problema fue el pase, el garzón o la cocina.</p></details>
-  <details><summary>Terraza llena, faltan dos garzones, la cocina va atrasada.</summary><p>Reasigno rangos, me tomo mesas, aviso a los clientes del tiempo de espera antes de que pregunten, empujo bebidas y entradas rápidas para que la espera se sienta menos, y coordino con cocina el orden de salida.</p></details>
-  <details><summary>Te piden un vino para la Don Alfredo.</summary><p>Le recomiendo el Pinot Noir Casa Marín: es liviano y va muy bien con el prosciutto y el grana. Si prefieren blanco, un Chardonnay de Leyda.</p></details>
-  <details><summary>Mesa de ocho quiere pagar por separado al final.</summary><p>Lo ideal es preguntarlo al tomar el pedido y ordenar la comanda por persona. Si no se hizo, divido con calma en el POS y aviso a la mesa que tomará unos minutos.</p></details>
-  <details><summary>Un cliente con alergia o vegano.</summary><p>Confirmo con cocina antes de prometer nada. La carta marca platos veganos y hay pizzas con opción vegana: Norma, Del Huerto, Piero y Funghi Tartufo.</p></details>
+  <details data-k="Disculpa|Pizza nueva con prioridad|Algo para la espera|Revisar dónde falló"><summary>Una pizza llegó fría y el cliente reclama.</summary><p>Me disculpo, retiro la pizza y pido una nueva con prioridad a cocina. Mientras tanto le ofrezco algo para la espera. Después reviso si el problema fue el pase, el garzón o la cocina.</p></details>
+  <details data-k="Reasignar rangos y tomar mesas|Avisar la espera antes de que pregunten|Bebidas y entradas rápidas|Coordinar con cocina el orden de salida"><summary>Terraza llena, faltan dos garzones, la cocina va atrasada.</summary><p>Reasigno rangos, me tomo mesas, aviso a los clientes del tiempo de espera antes de que pregunten, empujo bebidas y entradas rápidas para que la espera se sienta menos, y coordino con cocina el orden de salida.</p></details>
+  <details data-k="Pinot Noir Casa Marín|Por qué: liviano, va con prosciutto y grana|Alternativa en blanco"><summary>Te piden un vino para la Don Alfredo.</summary><p>Le recomiendo el Pinot Noir Casa Marín: es liviano y va muy bien con el prosciutto y el grana. Si prefieren blanco, un Chardonnay de Leyda.</p></details>
+  <details data-k="Lo ideal: preguntarlo al tomar el pedido|Dividir con calma en el sistema|Avisar que toma unos minutos"><summary>Mesa de ocho quiere pagar por separado al final.</summary><p>Lo ideal es preguntarlo al tomar el pedido y ordenar la comanda por persona. Si no se hizo, divido con calma en el POS y aviso a la mesa que tomará unos minutos.</p></details>
+  <details data-k="Confirmar con cocina antes de prometer|Pizzas con opción vegana: Norma, Del Huerto, Piero, Funghi Tartufo"><summary>Un cliente con alergia o vegano.</summary><p>Confirmo con cocina antes de prometer nada. La carta marca platos veganos y hay pizzas con opción vegana: Norma, Del Huerto, Piero y Funghi Tartufo.</p></details>
+  <details data-k="Separarlos sin público: cada uno a su rango|El servicio sigue|Conversar al cierre, por separado y después juntos"><summary>Dos garzones discuten en pleno servicio.</summary><p>Los separo al tiro y sin público: cada uno a su rango y el servicio sigue. Al cierre converso con cada uno por separado y después juntos, para acordar cómo se resuelve la próxima vez. Si es algo grave, lo informo.</p></details>
+  <details data-k="Revisar la cuenta con él, con calma|Si hay error: disculpa y corrección inmediata|Si no hay error: explicar con respeto|Ver dónde se produjo"><summary>Un cliente dice que le cobraron de más.</summary><p>Reviso la cuenta con él en la mesa, con calma. Si hay un error, me disculpo, lo corrijo de inmediato y le traigo la cuenta nueva. Si no lo hay, le explico el detalle con respeto. Después veo dónde se produjo el error para que no se repita.</p></details>
+  <details data-k="Respeto, sin exponerlo|Agua, café o algo de comer|Explicar en privado que no se le sirve más|Que tenga cómo irse seguro"><summary>Un cliente bebió de más y pide otra ronda.</summary><p>Con respeto y sin exponerlo frente a su mesa: le ofrezco agua, café o algo de comer y bajo el ritmo del servicio. Si insiste, le explico en privado que por hoy no le puedo servir más alcohol, y me apoyo en el encargado. Me preocupo de que tenga cómo irse seguro.</p></details>
+  <details data-k="No decir que no a secas|Tiempo de espera realista|Ofrecer la barra mientras esperan|Cumplir lo prometido"><summary>Llega una mesa sin reserva y el local está lleno.</summary><p>No digo que no a secas: doy un tiempo de espera realista, anoto el nombre y ofrezco esperar en la barra con un cóctel. Si se desocupa antes, los llamo primero. Cumplir el tiempo que prometí vale más que prometer poco.</p></details>
 </div></section>
 
 <section class="chap" id="tuyas" data-min="1"><div class="wrap">
@@ -612,6 +659,14 @@ details p{margin:8px 0 14px}
     </div>
   </div></div>
 
+  <div class="xp" id="xp"><div class="wrap">
+    <p class="eyebrow">Para el camino</p>
+    <h2>Repaso exprés</h2>
+    <p class="sub">Lo esencial de cada capítulo en dos minutos. Escúchalo en el trayecto y antes de entrar.</p>
+    <button class="btn btn-olive" id="xpsay"><svg><use href="#i-ear"/></svg>Escuchar el repaso</button>
+    <div class="xp-list" id="xplist"></div>
+  </div></div>
+
   <section class="chap" id="dia" data-min="1" style="border-top:0;padding-top:26px"><div class="wrap">
     <p class="eyebrow">Capítulo 10</p>
     <h2>Checklist del día</h2>
@@ -630,9 +685,12 @@ details p{margin:8px 0 14px}
 </main>
 
 <div class="player" id="player" role="region" aria-label="Reproductor" hidden>
+  <div class="pprog"><i id="pbar2"></i></div>
   <span class="now" id="now">Toca Escuchar en cualquier sección</span>
+  <button class="btn pico" id="prev" aria-label="Frase anterior"><svg><use href="#i-prev"/></svg></button>
   <button class="btn" id="pp" disabled>Pausa</button>
-  <button class="btn" id="stop" disabled>Detener</button>
+  <button class="btn pico" id="nextb" aria-label="Frase siguiente"><svg><use href="#i-next"/></svg></button>
+  <button class="btn pico" id="stop" aria-label="Detener" disabled><svg><use href="#i-stop"/></svg></button>
   <select id="rate" aria-label="Velocidad"><option value="0.85">Lento</option><option value="1" selected>Normal</option><option value="1.2">Rápido</option></select>
 </div>
 
@@ -709,6 +767,12 @@ function renderProgress() {
   $('#meterbar').style.width = (100 * n / tot) + '%';
   $$('#chapters a').forEach(a => a.classList.toggle('is-done', done.has(a.dataset.id)));
   $$('.done').forEach(b => { const d = done.has(b.dataset.id); b.setAttribute('aria-pressed', d); b.innerHTML = d ? icon('i-check') + 'Estudiado' : 'Marcar como estudiado'; });
+  const pend = secs.find(s => !done.has(s.id)), rs = $('#resume');
+  rs.hidden = !(n > 0 && pend);
+  if (pend) {
+    rs.textContent = 'Seguir en el capítulo ' + String(secs.indexOf(pend) + 1).padStart(2, '0') + ': ' + pend.querySelector('h2').textContent + ' →';
+    rs.onclick = e => { e.preventDefault(); showView(viewOf(pend)); pend.scrollIntoView({block: 'start'}); };
+  }
 }
 renderProgress();
 
@@ -773,15 +837,29 @@ const chunk = t => {
   });
   return out;
 };
-let queue = [], idx = 0, cur = -1, chain = false, paused = false, run = 0;
+let queue = [], idx = 0, cur = -1, chain = false, paused = false, run = 0, lock = null;
 const mark = i => { secs.forEach(s => s.classList.remove('speaking')); if (i >= 0) secs[i].classList.add('speaking'); };
+/* Mantiene la pantalla encendida mientras se escucha: si el teléfono se bloquea, la voz se corta. */
+const wake = async on => {
+  try {
+    if (on) { if (!lock && navigator.wakeLock) { lock = await navigator.wakeLock.request('screen'); lock.addEventListener('release', () => { lock = null; }); } }
+    else if (lock) { const l = lock; lock = null; await l.release(); }
+  } catch (e) {}
+};
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && !player.hidden && !paused) wake(true); });
+const setPP = () => { pp.textContent = paused ? 'Seguir' : 'Pausa'; pp.classList.toggle('on', !paused); };
 function startQueue(label, text) {
-  synth.cancel(); run++; paused = false;
-  queue = chunk(text); idx = 0;
+  queue = chunk(text);
   nowEl.innerHTML = 'Escuchando: <b>' + esc(label) + '</b>';
   player.hidden = false; document.body.classList.add('playing');
-  pp.disabled = stopB.disabled = false; pp.textContent = 'Pausa'; pp.classList.add('on');
-  next(run);
+  pp.disabled = stopB.disabled = false;
+  jump(0);
+}
+/* Salta a una frase. La pausa también pasa por aquí: en Android pause() y resume() no funcionan, así que se corta y se retoma la frase. */
+function jump(to) {
+  const r = ++run; synth.cancel();
+  idx = Math.max(0, to); paused = false; setPP(); wake(true);
+  setTimeout(() => next(r), 60);
 }
 function play(i, all) {
   if (!synth) { player.hidden = false; nowEl.textContent = 'Tu navegador no permite leer en voz alta.'; return; }
@@ -802,6 +880,7 @@ function next(r) {
     if (chain && cur + 1 < secs.length) { play(cur + 1, true); return; }
     stop(); return;
   }
+  $('#pbar2').style.width = (100 * idx / queue.length) + '%';
   const u = new SpeechSynthesisUtterance(queue[idx++]);
   u.lang = voice ? voice.lang : 'es-CL'; if (voice) u.voice = voice;
   u.rate = parseFloat(rateSel.value);
@@ -809,18 +888,22 @@ function next(r) {
   synth.speak(u);
 }
 function stop() {
-  run++; if (synth) synth.cancel(); paused = false; mark(-1);
+  run++; if (synth) synth.cancel(); paused = false; mark(-1); wake(false);
   player.hidden = true; document.body.classList.remove('playing');
-  pp.disabled = stopB.disabled = true; pp.textContent = 'Pausa'; pp.classList.remove('on');
+  pp.disabled = stopB.disabled = true; setPP(); pp.classList.remove('on');
+  $('#pbar2').style.width = '0';
 }
 pp.addEventListener('click', () => {
   if (!synth) return;
-  if (paused) { synth.resume(); paused = false; pp.textContent = 'Pausa'; pp.classList.add('on'); }
-  else { synth.pause(); paused = true; pp.textContent = 'Seguir'; pp.classList.remove('on'); }
+  if (paused) jump(idx - 1);
+  else { paused = true; run++; synth.cancel(); setPP(); wake(false); }
 });
+$('#prev').addEventListener('click', () => { if (!pp.disabled) jump(idx - 2); });
+$('#nextb').addEventListener('click', () => { if (!pp.disabled) jump(idx); });
 stopB.addEventListener('click', stop);
 $('#all').addEventListener('click', () => play(0, true));
-rateSel.addEventListener('change', () => { if (!pp.disabled) { const keep = Math.max(0, idx - 1); const r = ++run; synth.cancel(); idx = keep; setTimeout(() => next(r), 50); } });
+rateSel.addEventListener('change', () => { store.set('romaria-rate', rateSel.value); if (!pp.disabled && !paused) jump(idx - 1); });
+{ const r = store.get('romaria-rate', null); if (r && [...rateSel.options].some(o => o.value === r)) rateSel.value = r; }
 
 /* ---------- datos para practicar (carta oficial, 24-11-2026) ---------- */
 const PLATOS = [
@@ -875,6 +958,7 @@ const MARIDA = [
 ];
 const SIM = $$('#preguntas details, #casos details').map(d => ({
   q: d.querySelector('summary').textContent,
+  k: (d.dataset.k || '').split('|').filter(Boolean),
   a: [...d.querySelectorAll('p:not(.note)')].map(p => p.textContent),
   n: [...d.querySelectorAll('p.note')].map(p => p.textContent),
   caso: !!d.closest('#casos')
@@ -934,22 +1018,27 @@ $$('.decks button').forEach(b => b.addEventListener('click', () => loadDeck(b.da
 loadDeck('carta');
 
 /* ---------- quiz ---------- */
-const quiz = {started:false, n:0, score:0, res:[], q:null, total:10};
+const quiz = {started:false, n:0, score:0, res:[], q:null, total:10, bad:[]};
+/* Lo que se falla queda anotado y vuelve a salir más seguido hasta acertarlo. */
+const miss = new Set(store.get('romaria-miss', []));
+const pickW = (arr, kf) => { const m = arr.filter(x => miss.has(kf(x))); return m.length && Math.random() < .6 ? pick(m) : pick(arr); };
 const uniq = (arr, k) => { const s = new Set(), o = []; for (const a of arr) { const v = k(a); if (!s.has(v)) { s.add(v); o.push(a); } } return o; };
 function options(correct, pool) { return shuffle([correct, ...shuffle(pool.filter(x => x !== correct)).slice(0, 3)]); }
 const GEN = [
-  () => { const p = pick(PLATOS); const prices = [...new Set(PLATOS.map(x => fmt(x.p)))]; return {q:'¿Cuánto cuesta ' + (p.pz ? 'la pizza ' : '') + p.n + '?', ok:fmt(p.p), opts:options(fmt(p.p), prices), ex:p.n + ': ' + lc(p.i) + '. ' + fmt(p.p) + '.'}; },
-  () => { const pz = PLATOS.filter(x => x.pz); const p = pick(pz); const ing = p.i.replace(/^(Pomodoro, )?mozzarella,? (y )?/i, ''); return {q:'¿Qué pizza lleva ' + ing.charAt(0).toLowerCase() + ing.slice(1) + '?', ok:p.n, opts:options(p.n, pz.map(x => x.n)), ex:p.n + ': ' + lc(p.i) + '. ' + fmt(p.p) + '.'}; },
-  () => { const c = pick(COCTELES.filter(x => x.n !== 'Pisco sour')); return {q:'¿Qué lleva el cóctel ' + c.n + '?', ok:c.i, opts:options(c.i, COCTELES.filter(x => x.n !== 'Pisco sour').map(x => x.i)), ex:c.n + ': ' + lc(c.i) + '. ' + fmt(c.p) + '.'}; },
-  () => { const m = pick(MARIDA); return {q:'Te piden algo para acompañar ' + (m.q || 'la ' + m.a) + '. ¿Qué recomiendas?', ok:m.b, opts:options(m.b, MARIDA.map(x => x.b)), ex:m.b + '. ' + m.w}; },
-  () => { const g = pick(GLOS); const first = s => s.split(/(?<=\.)\s/)[0]; const ok = first(g.d); return {q:'¿Qué es «' + g.t + '»?', ok, opts:options(ok, uniq(GLOS, x => first(x.d)).map(x => first(x.d))), ex:g.t + ': ' + g.d}; }
+  () => { const p = pickW(PLATOS, x => 'precio:' + x.n); const prices = [...new Set(PLATOS.map(x => fmt(x.p)))]; return {key:'precio:' + p.n, q:'¿Cuánto cuesta ' + (p.pz ? 'la pizza ' : '') + p.n + '?', ok:fmt(p.p), opts:options(fmt(p.p), prices), ex:p.n + ': ' + lc(p.i) + '. ' + fmt(p.p) + '.'}; },
+  () => { const pz = PLATOS.filter(x => x.pz); const p = pickW(pz, x => 'pizza:' + x.n); const ing = p.i.replace(/^(Pomodoro, )?mozzarella,? (y )?/i, ''); const q = p.n === 'Margarita' ? '¿Qué pizza lleva solo pomodoro, mozzarella y albahaca?' : '¿Qué pizza lleva ' + lc(ing) + '?'; return {key:'pizza:' + p.n, q, ok:p.n, opts:options(p.n, pz.map(x => x.n)), ex:p.n + ': ' + lc(p.i) + '. ' + fmt(p.p) + '.'}; },
+  () => { const cs = COCTELES.filter(x => x.n !== 'Pisco sour'); const c = pickW(cs, x => 'coctel:' + x.n); return {key:'coctel:' + c.n, q:'¿Qué lleva el cóctel ' + c.n + '?', ok:c.i, opts:options(c.i, cs.map(x => x.i)), ex:c.n + ': ' + lc(c.i) + '. ' + fmt(c.p) + '.'}; },
+  () => { const m = pickW(MARIDA, x => 'marida:' + x.a); return {key:'marida:' + m.a, q:'Te piden algo para acompañar ' + (m.q || 'la ' + m.a) + '. ¿Qué recomiendas?', ok:m.b, opts:options(m.b, MARIDA.map(x => x.b)), ex:m.b + '. ' + m.w}; },
+  () => { const g = pickW(GLOS, x => 'glos:' + x.t); const first = s => s.split(/(?<=\.)\s/)[0]; const ok = first(g.d); return {key:'glos:' + g.t, q:'¿Qué es «' + g.t + '»?', ok, opts:options(ok, uniq(GLOS, x => first(x.d)).map(x => first(x.d))), ex:g.t + ': ' + g.d}; }
 ];
 function quizIntro() {
   const best = store.get('romaria-best', null);
-  $('#qstage').innerHTML = '<div class="endcard"><p class="eyebrow">Quiz de la carta</p><div class="big">10</div><p>preguntas sobre precios, pizzas, cócteles, maridajes e ingredientes. Cada vez salen distintas.' + (best !== null ? '<br><span class="note">Tu mejor marca: ' + best + ' de 10.</span>' : '') + '</p><button class="btn btn-olive" id="qstart">' + icon('i-play') + 'Empezar</button></div>';
+  $('#qstage').innerHTML = '<div class="endcard"><p class="eyebrow">Quiz de la carta</p><div class="big">10</div><p>preguntas sobre precios, pizzas, cócteles, maridajes e ingredientes. Cada vez salen distintas.' +
+    (miss.size ? '<br><span class="note">Tienes ' + miss.size + (miss.size === 1 ? ' respuesta fallada' : ' respuestas falladas') + ': van a salir más seguido hasta que las aciertes.</span>' : '') +
+    (best !== null ? '<br><span class="note">Tu mejor marca: ' + best + ' de 10.</span>' : '') + '</p><button class="btn btn-olive" id="qstart">' + icon('i-play') + 'Empezar</button></div>';
   $('#qstart').onclick = quizStart;
 }
-function quizStart() { quiz.started = true; quiz.n = 0; quiz.score = 0; quiz.res = []; quiz.seen = new Set(); quizNext(); }
+function quizStart() { quiz.started = true; quiz.n = 0; quiz.score = 0; quiz.res = []; quiz.bad = []; quiz.seen = new Set(); quizNext(); }
 function quizNext() {
   if (quiz.n >= quiz.total) return quizEnd();
   let q, tries = 0;
@@ -963,53 +1052,150 @@ function quizNext() {
 function quizAnswer(b) {
   const q = quiz.q, chosen = q.opts[+b.dataset.i], ok = chosen === q.ok;
   $$('#qstage .opt').forEach(x => { x.disabled = true; if (q.opts[+x.dataset.i] === q.ok) x.classList.add('ok'); });
-  if (!ok) b.classList.add('bad');
+  if (!ok) { b.classList.add('bad'); quiz.bad.push(q); miss.add(q.key); } else miss.delete(q.key);
+  store.set('romaria-miss', [...miss]);
   quiz.res[quiz.n] = ok; if (ok) quiz.score++;
   $('#qafter').innerHTML = '<div class="expl"><b>' + (ok ? '¡Correcto!' : 'No era esa') + '</b><br>' + esc(q.ex) + '</div><div class="btn-row"><button class="btn btn-olive" id="qnext">' + (quiz.n + 1 < quiz.total ? 'Siguiente' : 'Ver resultado') + '</button><button class="btn btn-line" id="qsay">' + icon('i-ear') + 'Escuchar</button></div>';
   $('#qnext').onclick = () => { quiz.n++; quizNext(); window.scrollTo({top: $('.pv').offsetTop - 60}); };
   $('#qsay').onclick = () => say('Quiz', q.q + ' ' + q.ex);
+  $('#qnext').scrollIntoView({block: 'nearest'});
 }
 function quizEnd() {
   const s = quiz.score, best = Math.max(s, store.get('romaria-best', 0)); store.set('romaria-best', best);
   const msg = s >= 9 ? 'Nivel capitán. Llegas listo.' : s >= 7 ? 'Muy bien. Repasa las que fallaste y quedas impecable.' : s >= 5 ? 'Vas bien. Una vuelta más por las tarjetas y lo subes.' : 'Dale una vuelta a las tarjetas de la carta y vuelve a intentarlo.';
-  $('#qstage').innerHTML = '<div class="endcard"><p class="eyebrow">Resultado</p><div class="big">' + s + '/10</div><p>' + msg + '<br><span class="note">Tu mejor marca: ' + best + ' de 10.</span></p><div class="btn-row" style="justify-content:center"><button class="btn btn-olive" id="qagain">Otra ronda</button><button class="btn btn-line" id="qcards">Ir a las tarjetas</button></div></div>';
+  const bad = quiz.bad;
+  $('#qstage').innerHTML = '<div class="endcard"><p class="eyebrow">Resultado</p><div class="big">' + s + '/10</div><p>' + msg + '<br><span class="note">Tu mejor marca: ' + best + ' de 10.</span></p>' +
+    (bad.length ? '<p class="eyebrow" style="text-align:left">Para repasar</p><ul class="missed">' + bad.map(q => '<li><b>' + esc(q.q) + '</b><br>' + esc(q.ex) + '</li>').join('') + '</ul>' : '') +
+    '<div class="btn-row" style="justify-content:center"><button class="btn btn-olive" id="qagain">Otra ronda</button>' +
+    (bad.length ? '<button class="btn btn-line" id="qbad">' + icon('i-ear') + 'Escuchar las que fallé</button>' : '<button class="btn btn-line" id="qcards">Ir a las tarjetas</button>') + '</div></div>';
   $('#qagain').onclick = quizStart;
-  $('#qcards').onclick = () => $('.seg [data-mode=tarjetas]').click();
+  if (bad.length) $('#qbad').onclick = () => say('Para repasar', bad.map(q => q.ex).join(' '));
+  else $('#qcards').onclick = () => $('.seg [data-mode=tarjetas]').click();
 }
 
 /* ---------- simulador de entrevista ---------- */
-const sim = {started:false, order:[], i:0, t:null, left:60};
+/* Cada pregunta se responde en voz alta, se puede grabar para escucharse, y se califica:
+   las que quedan en «La repito» salen primero la próxima vez. */
+const sim = {started:false, order:[], i:0, t:null, left:60, good:0};
+const simSt = store.get('romaria-sim', {});
 const SIM_T = 60, CIRC = 2 * Math.PI * 32;
+const canRec = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
+let rec = null, recStream = null, recChunks = [], recUrl = null;
+async function recStart() {
+  if (!canRec || !store.get('romaria-rec', false)) return false;
+  try {
+    recStream = await navigator.mediaDevices.getUserMedia({audio: true});
+    recChunks = []; rec = new MediaRecorder(recStream);
+    rec.ondataavailable = e => { if (e.data && e.data.size) recChunks.push(e.data); };
+    rec.start(); return true;
+  } catch (e) { rec = null; return false; }
+}
+function recStop() {
+  return new Promise(res => {
+    const end = () => { if (recStream) recStream.getTracks().forEach(t => t.stop()); recStream = null; };
+    if (!rec || rec.state === 'inactive') { rec = null; end(); return res(null); }
+    const r = rec; rec = null;
+    r.onstop = () => { end(); const b = new Blob(recChunks, {type: r.mimeType || 'audio/webm'}); if (recUrl) URL.revokeObjectURL(recUrl); recUrl = b.size ? URL.createObjectURL(b) : null; res(recUrl); };
+    r.stop();
+  });
+}
+const simN = v => SIM.filter(s => (simSt[s.q] || '') === v).length;
 function simIntro() {
-  $('#sstage').innerHTML = '<div class="endcard"><p class="eyebrow">Simulador de entrevista</p><div class="big">' + SIM.length + '</div><p>preguntas y casos reales. Escucha la pregunta, responde en voz alta en un minuto y compara con la respuesta modelo.</p><button class="btn btn-olive" id="sstart">' + icon('i-play') + 'Empezar</button></div>';
-  $('#sstart').onclick = () => { sim.started = true; sim.order = shuffle(SIM.map((_, i) => i)); sim.i = 0; simShow(); };
+  const ok = simN('ok'), rp = simN('rep');
+  $('#sstage').innerHTML = '<div class="endcard"><p class="eyebrow">Simulador de entrevista</p><div class="big">' + SIM.length + '</div><p>preguntas y casos reales. Responde en voz alta en un minuto, escúchate si quieres y compara con la respuesta modelo.' +
+    (ok || rp ? '<br><span class="note">Llevas ' + ok + ' de ' + SIM.length + ' bien' + (rp ? ' y ' + rp + ' por repetir: esas salen primero' : '') + '.</span>' : '') + '</p>' +
+    '<div class="btn-row" style="justify-content:center"><button class="btn btn-olive" id="sstart">' + icon('i-play') + (ok || rp ? 'Seguir' : 'Empezar') + '</button>' +
+    (ok || rp ? '<button class="btn btn-line" id="sreset">Empezar de cero</button>' : '') + '</div></div>';
+  $('#sstart').onclick = () => simStart(false);
+  if (ok || rp) $('#sreset').onclick = () => { Object.keys(simSt).forEach(k => delete simSt[k]); store.set('romaria-sim', simSt); simStart(false); };
+}
+function simStart(onlyRep) {
+  sim.started = true;
+  const grp = v => shuffle(SIM.map((_, i) => i).filter(i => (simSt[SIM[i].q] || '') === v));
+  sim.order = onlyRep ? grp('rep') : [...grp('rep'), ...grp(''), ...grp('ok')];
+  sim.i = 0; sim.good = 0; simShow();
 }
 function simShow() {
-  clearInterval(sim.t); sim.left = SIM_T;
-  const s = SIM[sim.order[sim.i % sim.order.length]];
-  $('#sstage').innerHTML = '<p class="eyebrow">' + (s.caso ? 'Caso de servicio' : 'Pregunta') + ' · ' + ((sim.i % sim.order.length) + 1) + ' de ' + SIM.length + '</p><div class="simq">' + esc(s.q) + '</div>' +
-    '<div class="timer"><svg viewBox="0 0 76 76"><circle class="bgc" cx="38" cy="38" r="32"/><circle class="fg" id="sfg" cx="38" cy="38" r="32" stroke-dasharray="' + CIRC + '" stroke-dashoffset="0"/></svg><div><div class="tt" id="stt">1:00</div><div class="note">para responder en voz alta</div></div></div>' +
-    '<div class="btn-row"><button class="btn btn-olive" id="sgo">' + icon('i-play') + 'Responder</button><button class="btn btn-line" id="ssay">' + icon('i-ear') + 'Escuchar la pregunta</button></div>' +
-    '<div id="sans"></div>';
+  clearInterval(sim.t); sim.t = null; sim.left = SIM_T; recStop();
+  const s = SIM[sim.order[sim.i]];
+  $('#sstage').innerHTML = '<p class="eyebrow">' + (s.caso ? 'Caso de servicio' : 'Pregunta') + ' · ' + (sim.i + 1) + ' de ' + sim.order.length + '</p><div class="simq">' + esc(s.q) + '</div>' +
+    '<div class="timer" id="stimer"><svg viewBox="0 0 76 76"><circle class="bgc" cx="38" cy="38" r="32"/><circle class="fg" id="sfg" cx="38" cy="38" r="32" stroke-dasharray="' + CIRC + '" stroke-dashoffset="0"/></svg><div><div class="tt" id="stt">1:00</div><div class="note">para responder en voz alta</div></div></div>' +
+    (canRec ? '<label class="recopt" id="srecopt"><input type="checkbox" id="srecon"' + (store.get('romaria-rec', false) ? ' checked' : '') + '><span>Grabarme para escucharme después. La grabación no sale de este teléfono.</span></label>' : '') +
+    '<div class="btn-row"><button class="btn btn-olive" id="sgo">' + icon('i-mic') + 'Responder</button><button class="btn btn-line" id="ssay">' + icon('i-ear') + 'Escuchar la pregunta</button><button class="btn btn-line" id="sskip">Ver la respuesta</button></div>' +
+    '<p class="recst" id="srec"></p><div id="sans"></div>';
+  if (canRec) $('#srecon').onchange = e => store.set('romaria-rec', e.target.checked);
   $('#ssay').onclick = () => say('Pregunta', s.q);
-  $('#sgo').onclick = () => {
-    if (sim.t) { clearInterval(sim.t); sim.t = null; reveal(); return; }
-    $('#sgo').innerHTML = 'Terminé';
+  const go = $('#sgo');
+  const finish = () => { clearInterval(sim.t); sim.t = null; reveal(); };
+  $('#sskip').onclick = finish;
+  go.onclick = async () => {
+    if (sim.t) return finish();
+    stop(); go.disabled = true;
+    const want = canRec && store.get('romaria-rec', false), on = await recStart();
+    if (!document.body.contains(go)) { recStop(); return; }
+    go.disabled = false; go.innerHTML = icon('i-check') + 'Terminé';
+    $('#sskip').hidden = true; if (canRec) $('#srecopt').hidden = true;
+    $('#srec').innerHTML = on ? '<span class="recdot"></span>Grabando tu respuesta' : (want ? 'No pude usar el micrófono. Responde igual en voz alta.' : '');
     sim.t = setInterval(() => {
       sim.left--; const m = Math.floor(sim.left / 60), sec = sim.left % 60;
       $('#stt').textContent = m + ':' + String(sec).padStart(2, '0');
       $('#sfg').style.strokeDashoffset = CIRC * (1 - sim.left / SIM_T);
-      if (sim.left <= 0) { clearInterval(sim.t); sim.t = null; reveal(); }
+      $('#stimer').classList.toggle('low', sim.left <= 10);
+      if (sim.left <= 0) finish();
     }, 1000);
   };
-  const reveal = () => {
-    $('#sgo').remove();
-    $('#sans').innerHTML = '<div class="answer"><p class="eyebrow">Respuesta modelo</p>' + s.a.map(p => '<p>' + esc(p) + '</p>').join('') + s.n.map(p => '<p class="note">' + esc(p) + '</p>').join('') + '</div>' +
-      '<div class="btn-row"><button class="btn btn-olive" id="snext">Otra pregunta</button><button class="btn btn-line" id="ssayans">' + icon('i-ear') + 'Escuchar la respuesta</button></div>';
-    $('#snext').onclick = () => { sim.i++; simShow(); };
+  const reveal = async () => {
+    go.remove(); $('#sskip').remove(); if (canRec) $('#srecopt').hidden = true; $('#srec').textContent = '';
+    const url = await recStop();
+    if (!document.body.contains($('#sans'))) return;
+    $('#sans').innerHTML =
+      (url ? '<div class="mine"><p class="eyebrow">Tu respuesta</p><audio controls src="' + url + '"></audio><p class="note" style="margin:8px 0 0">Escucha el tono, las muletillas y si fuiste al grano.</p></div>' : '') +
+      (s.k.length ? '<div class="keys"><p class="eyebrow">¿Dijiste estas ideas?</p>' + s.k.map(k => '<label><input type="checkbox"><span>' + esc(k) + '</span></label>').join('') + '</div>' : '') +
+      '<div class="answer"><p class="eyebrow">Respuesta modelo</p>' + s.a.map(p => '<p>' + esc(p) + '</p>').join('') + s.n.map(p => '<p class="note">' + esc(p) + '</p>').join('') + '</div>' +
+      '<div class="btn-row"><button class="btn btn-line" id="ssayans">' + icon('i-ear') + 'Escuchar la respuesta</button></div>' +
+      '<p class="eyebrow rateq">¿Cómo te salió?</p><div class="fact"><button class="btn again" id="srep">La repito</button><button class="btn btn-olive" id="sok">' + icon('i-check') + 'Me salió bien</button></div>';
     $('#ssayans').onclick = () => say('Respuesta modelo', s.a.join(' '));
+    const rate = v => {
+      simSt[s.q] = v; store.set('romaria-sim', simSt); if (v === 'ok') sim.good++;
+      stop(); sim.i++;
+      sim.i < sim.order.length ? simShow() : simEnd();
+      window.scrollTo({top: $('.pv').offsetTop - 60});
+    };
+    $('#srep').onclick = () => rate('rep');
+    $('#sok').onclick = () => rate('ok');
   };
 }
+function simEnd() {
+  const rp = simN('rep'), tot = sim.order.length;
+  $('#sstage').innerHTML = '<div class="endcard"><p class="eyebrow">Ronda terminada</p><div class="big">' + sim.good + '/' + tot + '</div><p>' +
+    (rp ? 'Te quedan ' + rp + ' por repetir. Dales otra vuelta hasta que salgan solas.' : 'Todas te salieron bien. Llegas con las respuestas en la punta de la lengua.') + '</p>' +
+    '<div class="btn-row" style="justify-content:center">' + (rp ? '<button class="btn btn-olive" id="srepall">Repetir las ' + rp + ' pendientes</button>' : '') + '<button class="btn ' + (rp ? 'btn-line' : 'btn-olive') + '" id="sall">Otra ronda completa</button></div></div>';
+  if (rp) $('#srepall').onclick = () => simStart(true);
+  $('#sall').onclick = () => simStart(false);
+}
+
+/* ---------- repaso exprés ---------- */
+const XP = secs.map((s, i) => ({s, i, k: s.querySelector('.key p:not(.eyebrow)')})).filter(x => x.k);
+XP.forEach(x => {
+  const a = document.createElement('a'); a.href = '#' + x.s.id;
+  a.innerHTML = '<span class="n">' + String(x.i + 1).padStart(2, '0') + '</span><b>' + esc(x.s.querySelector('h2').textContent) + '</b><span class="x">' + esc(x.k.textContent) + '</span>';
+  a.addEventListener('click', e => { e.preventDefault(); showView(viewOf(x.s)); x.s.scrollIntoView({block: 'start'}); });
+  $('#xplist').append(a);
+});
+$('#xpsay').addEventListener('click', () => say('Repaso exprés', XP.map(x => x.s.querySelector('h2').textContent + '. ' + x.k.textContent).join(' ')));
+$('#goxp').addEventListener('click', () => { showView('hoy'); $('#xp').scrollIntoView({block: 'start'}); });
+
+/* ---------- buscador del glosario ---------- */
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+$('#gq').addEventListener('input', e => {
+  const q = norm(e.target.value.trim()); let any = false;
+  $$('#glosario ul.gl').forEach(ul => {
+    let n = 0;
+    ul.querySelectorAll('li').forEach(li => { const m = !q || (' ' + norm(li.textContent.replace('Ver fotos', '')).replace(/[^a-z0-9]+/g, ' ')).includes(' ' + q); li.hidden = !m; if (m) n++; });
+    ul.hidden = !n; ul.previousElementSibling.hidden = !n; if (n) any = true;
+  });
+  $('#gnone').hidden = any;
+});
 }
 if ('serviceWorker' in navigator) { addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {})); }
 </script>
