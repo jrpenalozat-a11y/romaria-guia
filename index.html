@@ -236,6 +236,13 @@ details p{margin:8px 0 14px}
 .timer.low .tt{color:var(--terra)}.timer.low .fg{stroke:var(--terra)}
 .rateq{margin:22px 0 8px}
 
+/* Botón flotante para plegar todo desde cualquier parte */
+.foldfab{position:fixed;right:12px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:28;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--olive);background:var(--paper);color:var(--olive-d);font:600 14px var(--sans);display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,0,0,.45);cursor:pointer}
+.foldfab svg{width:18px;height:18px}
+.foldfab:active{transform:scale(.97)}
+.foldfab:focus-visible{outline:3px solid var(--olive);outline-offset:3px}
+body.playing .foldfab{bottom:calc(200px + env(safe-area-inset-bottom))}
+
 /* Plegar capítulos y secciones */
 .chap h2{position:relative;padding-right:44px;cursor:pointer;border-radius:8px}
 .chap h2::after{content:"";position:absolute;right:10px;top:.42em;width:11px;height:11px;border-right:2.5px solid var(--olive);border-bottom:2.5px solid var(--olive);transform:rotate(-135deg);transition:transform .2s}
@@ -304,6 +311,7 @@ details p{margin:8px 0 14px}
   <symbol id="i-next" viewBox="0 0 24 24"><path d="M18 5v14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M5 5.5v13L15 12z" fill="currentColor"/></symbol>
   <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor"/></symbol>
   <symbol id="i-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></g></symbol>
+  <symbol id="i-fold" viewBox="0 0 24 24"><path d="M7 4l5 5 5-5M7 20l5-5 5 5M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-ear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3.5" y="14" width="4" height="6.5" rx="1.5"/><rect x="16.5" y="14" width="4" height="6.5" rx="1.5"/></g></symbol>
 </svg>
 
@@ -722,6 +730,8 @@ details p{margin:8px 0 14px}
   <select id="rate" aria-label="Velocidad"><option value="0.85">Lento</option><option value="1" selected>Normal</option><option value="1.2">Rápido</option></select>
 </div>
 
+<button class="foldfab" id="foldfab" hidden><svg><use href="#i-fold"/></svg>Plegar todo</button>
+
 <nav class="tabs" aria-label="Vistas">
   <button data-go="estudiar" aria-current="page"><span class="ic"><svg><use href="#i-book"/></svg></span>Estudiar</button>
   <button data-go="practicar" aria-current="false"><span class="ic"><svg><use href="#i-cards"/></svg></span>Practicar</button>
@@ -759,6 +769,7 @@ function showView(name, top) {
   $$('.tabs button').forEach(b => b.setAttribute('aria-current', b.dataset.go === name ? 'page' : 'false'));
   store.set('romaria-tab', name);
   if (top) window.scrollTo({top: 0});
+  updFab();
 }
 /* Se usa al navegar hacia un capítulo: si estaba plegado, lo abre. */
 const viewOf = el => { if (el.classList.contains('shut')) fold(el, false); return el.closest('.view').dataset.view; };
@@ -813,8 +824,22 @@ renderProgress();
 /* ---------- plegar capítulos y secciones ----------
    Un toque en el título de un capítulo lo pliega o lo abre; lo mismo con los subtítulos de adentro.
    Al marcar un capítulo como estudiado se pliega solo. Todo queda guardado en el teléfono. */
-const shut = new Set(store.get('romaria-shut', []));
-const syncFold = () => { $('#foldall').textContent = secs.every(s => s.classList.contains('shut')) ? 'Abrir todos los capítulos' : 'Plegar todos los capítulos'; };
+const shut = new Set(secs.map(s => s.id)); /* siempre abre con todo plegado */
+const syncFold = () => { $('#foldall').textContent = secs.every(s => s.classList.contains('shut')) ? 'Abrir todos los capítulos' : 'Plegar todos los capítulos'; updFab(); };
+/* El botón flotante aparece solo cuando hay algo abierto en la vista que se está mirando. */
+function updFab() {
+  const v = $$('.view').find(x => !x.hidden);
+  $('#foldfab').hidden = !(v && v.querySelector('.chap:not(.shut), details.ccat[open]'));
+}
+document.addEventListener('toggle', updFab, true);
+$('#foldfab').addEventListener('click', () => {
+  const v = $$('.view').find(x => !x.hidden);
+  secs.forEach(s => { if (!s.classList.contains('shut')) fold(s, true); });
+  $$('details.ccat[open]').forEach(d => { d.open = false; });
+  const idx = v && v.querySelector('.index');
+  idx ? idx.scrollIntoView({block: 'start'}) : window.scrollTo({top: 0});
+  updFab();
+});
 function fold(s, on) {
   s.classList.toggle('shut', on); s.querySelector('h2').setAttribute('aria-expanded', !on);
   on ? shut.add(s.id) : shut.delete(s.id); store.set('romaria-shut', [...shut]); syncFold();
